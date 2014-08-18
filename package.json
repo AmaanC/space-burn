@@ -1,11 +1,9 @@
 {
   "private": true,
-  "name": "js13k-boilerplate",
-  "version": "1.1.0",
-  "description": "JS13KGames boilerplate",
-  "author": "Florent Cailhol <florent.cailhol@gmail.com>",
-  "license": "MIT",
-  "repository": "ooflorent/js13k-boilerplate",
+  "name": "js13k-2014",
+  "version": "0.1",
+  "author": "Amaan Cheval <amaan.cheval@gmail.com>",
+  "repository": "AmaanC/js13k-2014",
   "devDependencies": {
     "browserify": "^5.10.0",
     "bundle-collapser": "^1.1.0",

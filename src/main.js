@@ -1,7 +1,6 @@
 var raf = require('./raf');
 var player = require('./player');
 var key = require('./keys');
-console.log(key);
 
 var canvas = document.querySelector('#game');
 var ctx = canvas.getContext('2d');
@@ -14,7 +13,8 @@ raf.start(function(elapsed) {
     if (key.up()) {
         player.up(elapsed);
     } else {
-        player.friction(elapsed);
+        // console.log(player.x, player.y);
+        player.move(elapsed);
     }
 
     if (key.right()) {
