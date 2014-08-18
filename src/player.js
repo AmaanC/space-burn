@@ -13,7 +13,7 @@ var hH = player.height / 2;
 
 var speed = 0; // The current speed
 var acc = 5; // Acceleration
-var lim = 10; // Speed limit
+var lim = 8; // Speed limit
 var dSpeed;
 var dX = 0, dY = 0;
 player.gravity = function(elapsed) {
