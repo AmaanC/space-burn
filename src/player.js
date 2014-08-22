@@ -12,12 +12,18 @@ var hW = player.width / 2;
 var hH = player.height / 2;
 
 var speed = 0; // The current speed
-var acc = 5; // Acceleration
-var lim = 8; // Speed limit
 var dSpeed;
 var dX = 0, dY = 0;
+
+// YOU CAN CONFIGURE THESE! --------------------------
+var acc = 7; // Acceleration
+var lim = 8; // Speed limit
+var turnSpeed = 3;
+var grav = 0.075;
+// NO MORE CONFIGURING! ------------------------------
+
 player.gravity = function(elapsed) {
-    dY -= 0.1;
+    dY -= grav;
 };
 player.move = function(elapsed) {
     player.x += dX;
@@ -43,16 +49,17 @@ player.up = function(elapsed) {
     particles.createParticles(player.x + hW, player.y + player.height, player.angle, Math.PI/10, 10, 10);
 };
 player.right = function(elapsed) {
-    player.angle += elapsed * 2 * Math.PI;
+    player.angle += elapsed * turnSpeed * Math.PI;
 };
 player.left = function(elapsed) {
-    player.angle -= elapsed * 2 * Math.PI;
+    player.angle -= elapsed * turnSpeed * Math.PI;
 };
 player.flip = function() {
     player.angle += Math.PI;
 };
 
 player.draw = function(elapsed, ctx) {
+    particles.draw(ctx, player);
     ctx.save();
     ctx.fillStyle = 'black';
     ctx.translate(player.x + player.width / 2, player.y + player.height / 2);
@@ -62,7 +69,6 @@ player.draw = function(elapsed, ctx) {
     ctx.fillStyle = 'red';
     ctx.fillRect(-player.width / 2, player.height / 2, player.width, 5);
     ctx.restore();
-    particles.draw(ctx);
 
     // ctx.fillRect(player.x, 300, 10, 10);
 };

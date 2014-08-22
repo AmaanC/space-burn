@@ -8,10 +8,14 @@ var Particle = function(x, y, angle, speed) {
     this.speed = speed;
     this.opacity = 1;
     this.delay = Math.random() * 10;
-    this.loop = function(ctx) {
+    this.loop = function(ctx, player) {
         if (this.delay > 0) {
             this.delay--;
             return false;
+        }
+        if (this.delay === 1) {
+            this.x = player.x;
+            this.y = player.y + player.height;
         }
         this.x += Math.sin(-this.angle) * speed;
         this.y += Math.cos(-this.angle) * speed;
@@ -44,9 +48,9 @@ var createParticles = function(x, y, playerAngle, range, speed, n) {
     }
 };
 
-var draw = function(ctx) {
+var draw = function(ctx, player) {
     for(var i = 0; i < particles.length; i++) {
-        particles[i].loop(ctx);
+        particles[i].loop(ctx, player);
     }
 };
 
