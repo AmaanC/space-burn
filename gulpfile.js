@@ -99,7 +99,7 @@ gulp.task('dist', ['build'], function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('src/**/*.js', ['lint', 'build_source']);
+  gulp.watch('src/**/*.js', [/*'lint', */'build_source']);
   gulp.watch('src/styles.less', ['build_styles']);
   gulp.watch('src/index.html', ['build_index']);
 });

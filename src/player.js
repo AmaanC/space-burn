@@ -1,11 +1,29 @@
 var particles = require('./particles');
+var SAT = require('./sat.min.js');
 
-var player = {};
-player.x = 0;
-player.y = 0;
+window.player = new SAT.Polygon(new SAT.V(), [
+  new SAT.V(),
+  new SAT.V(0, 30),
+  new SAT.V(10, 30),
+  new SAT.V(10, 0)
+]);
+
 player.width = 10;
 player.height = 30;
-player.angle = 0;
+player.setAngle(0);
+
+
+var rect = new SAT.Polygon(new SAT.V(), [
+    new SAT.V(),
+    new SAT.V(0, 300),
+    new SAT.V(800, 300),
+    new SAT.V(800, 0)
+]);
+rect.width = 800;
+rect.height = 300;
+rect.setAngle(Math.PI/6);
+window.rect = rect;
+
 
 // Half width, half height
 var hW = player.width / 2;
@@ -18,23 +36,23 @@ var dX = 0, dY = 0;
 // YOU CAN CONFIGURE THESE! --------------------------
 var acc = 7; // Acceleration
 var lim = 8; // Speed limit
-var turnSpeed = 3;
-var grav = 0.075;
+var turnSpeed = 2.2;
+var grav = 0.08;
 // NO MORE CONFIGURING! ------------------------------
 
 player.gravity = function(elapsed) {
     dY -= grav;
 };
 player.move = function(elapsed) {
-    player.x += dX;
-    player.y -= dY;
+    player.pos.x += dX;
+    player.pos.y -= dY;
     dX *= 0.99;
     dY *= 0.99;
 };
 player.up = function(elapsed) {
     speed += acc;
     dSpeed = elapsed * speed;
-    // console.log(player.x, player.y);
+    // console.log(player.pos.x, player.pos.y);
     // console.log(Math.sin(player.angle) * dSpeed, Math.cos(player.angle) * dSpeed);
     dX += Math.sin(player.angle) * dSpeed;
     dY += Math.cos(player.angle) * dSpeed;
@@ -46,7 +64,7 @@ player.up = function(elapsed) {
         speed = -lim;
     }
 
-    particles.createParticles(player.x + hW, player.y + player.height, player.angle, Math.PI/10, 10, 10);
+    particles.createParticles(player.pos.x + hW, player.pos.y + player.height, player.angle, Math.PI / 10, 10, 10);
 };
 player.right = function(elapsed) {
     player.angle += elapsed * turnSpeed * Math.PI;
@@ -60,17 +78,24 @@ player.flip = function() {
 
 player.draw = function(elapsed, ctx) {
     particles.draw(ctx, player);
+
     ctx.save();
-    ctx.fillStyle = 'black';
-    ctx.translate(player.x + player.width / 2, player.y + player.height / 2);
-    ctx.rotate(player.angle);
-    ctx.fillRect(-player.width / 2, -player.height / 2, player.width, player.height);
-    // Flames
-    ctx.fillStyle = 'red';
-    ctx.fillRect(-player.width / 2, player.height / 2, player.width, 5);
+    ctx.translate(rect.pos.x, rect.pos.y);
+    ctx.rotate(rect.angle);
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+    ctx.fillRect(0, 0, rect.width, rect.height);
     ctx.restore();
 
-    // ctx.fillRect(player.x, 300, 10, 10);
-};
+    ctx.save();
+    ctx.fillStyle = SAT.testPolygonPolygon(player, rect) ? 'green' : 'black';
+    ctx.translate(player.pos.x + hW, player.pos.y + hH);
+    ctx.rotate(player.angle);
+    ctx.fillRect(-hW, -hH, player.width, player.height);
+    // Flames
+    ctx.fillStyle = 'red';
+    ctx.fillRect(-hW, hH, player.width, 5);
+    ctx.restore();
 
+    // ctx.fillRect(player.pos.x, player.pos.y, 10, 10);
+};
 module.exports = player;
