@@ -1,7 +1,7 @@
 var particles = require('./particles');
 var SAT = require('./sat.min.js');
 
-window.player = new SAT.Polygon(new SAT.V(), [
+var player = new SAT.Polygon(new SAT.V(), [
   new SAT.V(),
   new SAT.V(0, 30),
   new SAT.V(10, 30),
