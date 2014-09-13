@@ -28,11 +28,13 @@ raf.start(function(elapsed) {
         enemies.spawn(Math.random() * 50);
     }
 
-    collisions.check(player, particles, enemies);
 
     // Clear the screen
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    collisions.check(player, particles.array, enemies.array, ctx);
+    
     enemies.loop(elapsed, ctx, player.offsetX, player.offsetY);
     particles.draw(elapsed, ctx, player);
     player.draw(elapsed, ctx);
+
 });

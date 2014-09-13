@@ -8,28 +8,41 @@ var aabb = function (a, b) {
     return true;
 };
 
-var inArea = function(area, array) {
+var inArea = function(area, array, response) {
     var ret = [];
     var curElem;
     for (var i = 0; i < array.length; i++) {
         curElem = array[i];
         if (aabb(area, curElem)) {
             ret.push(curElem);
+            if (response) {
+                response(curElem);
+            }
         }
     }
     return ret;
 };
 
 var playerArea = {
-    x: 350,
-    y: 250,
-    width: 100,
-    height: 100
+    x: 325,
+    y: 225,
+    width: 150,
+    height: 150
 };
 
-var check = function(player, particles, enemies) {
+var check = function(player, particles, enemies, ctx) {
     // Check for collisions between particles and enemies
     var enemiesToTest = inArea(playerArea, enemies);
+    console.log(enemiesToTest.length + ' hit');
+
+    var enemiesHurt = [];
+    for (var i = 0; i < particles.length; i++) {
+        inArea(particles[i], enemies, function(enemy) {
+            enemy.alive = false;
+        });
+    }
+
+    ctx.fillRect(playerArea.x, playerArea.y, playerArea.width, playerArea.height);
 };
 
 module.exports = {

@@ -32,8 +32,6 @@ var choose = function() {
 
 var SPAWN_RANGE = 100;
 var MIN_SPEED = 0.3, MAX_SPEED = 2;
-var MAX_WIDTH = 50, MAX_HEIGHT = 50;
-var MIN_WIDTH = 5, MIN_HEIGHT = 5;
 var WIDTH = 800, HEIGHT = 600;
 
 var spawn = function(n) {
@@ -43,15 +41,17 @@ var spawn = function(n) {
         obj = {
             x: (choose(-1, 1) * SPAWN_RANGE * rnd()) + (choose(0, 1) * WIDTH),
             y: (choose(-1, 1) * SPAWN_RANGE * rnd()) + (choose(0, 1) * HEIGHT),
-            width: rnd() * (MAX_WIDTH - MIN_WIDTH) + MIN_WIDTH,
-            height: rnd() * (MAX_HEIGHT - MIN_HEIGHT) + MIN_HEIGHT,
             speed: rnd() * (MAX_SPEED - MIN_SPEED) + MIN_SPEED,
             type: choose.apply(this, sprites),
-            health: 100
+            health: 100,
+            alive: true
         };
         targetY = rnd() * WIDTH;
         targetX = rnd() * HEIGHT;
         obj.angle = rnd() * Math.PI * 2;
+        ///////////////////////////////////// FIX THIS, THE WIDTH SHOULD BE DYNAMIC WHEN YOU ADD A PRELOADER
+        obj.width = 100;
+        obj.height = 60;
         enemies.push(obj);
     }
 };
@@ -60,10 +60,12 @@ var loop = function(elapsed, ctx, offsetX, offsetY) {
     var enemy;
     for (var i = 0, len = enemies.length; i < len; i++) {
         enemy = enemies[i];
-        enemy.x += Math.cos(enemy.angle) * enemy.speed - offsetX;
-        enemy.y += Math.sin(enemy.angle) * enemy.speed - offsetY;
-        ctx.fillStyle = 'red';
-        ctx.drawImage(rocks[enemy.type], enemy.x, enemy.y);
+        if (enemy.alive) {
+            enemy.x += Math.cos(enemy.angle) * enemy.speed - offsetX;
+            enemy.y += Math.sin(enemy.angle) * enemy.speed - offsetY;
+            ctx.fillStyle = 'red';
+            ctx.drawImage(rocks[enemy.type], enemy.x, enemy.y);
+        }
     }
 };
 
