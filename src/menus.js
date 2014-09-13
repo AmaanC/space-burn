@@ -10,9 +10,19 @@ module.exports = {
     drawMenu: function(ctx) {
         ctx.fillStyle = '#0f0d20';
         ctx.fillRect(0, 0, 800, 600);
+
+        ctx.drawImage(loader.images['logo.png'], 314, 130);
         text.write('Click to Play', 'center', 300, function() {
             ctx.fillStyle = 'white';
             ctx.font = '42pt Arial';
+        });
+        text.write('Art by the brilliant @mikedidthis', 'center', 500, function() {
+            ctx.fillStyle = 'white';
+            ctx.font = '20pt Arial';
+        });
+        text.write('Code by @AmaanC', 'center', 540, function() {
+            ctx.fillStyle = 'white';
+            ctx.font = '20pt Arial';
         });
     },
     drawEnd: function(ctx, score) {
