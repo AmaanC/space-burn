@@ -36,7 +36,8 @@ loader.done(function() {
             collisions.check(player, particles, enemies);
 
             // Clear the screen
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0f0d20';
+            ctx.fillRect(0, 0, 800, 600);
 
             enemies.loop(elapsed, ctx, player.offsetX, player.offsetY);
             particles.draw(elapsed, ctx, player);
