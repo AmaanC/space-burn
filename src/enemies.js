@@ -22,7 +22,7 @@ var spawn = function(n) {
             x: (rnd() * WIDTH),
             y: (rnd() * HEIGHT),
             speed: rnd() * (MAX_SPEED - MIN_SPEED) + MIN_SPEED,
-            type: choose.apply(this, loader.get('rock')),
+            type: choose.apply(this, loader.get('rock').concat(loader.get('power-icon'))),
             alive: true
         };
         targetY = rnd() * WIDTH;

@@ -69,6 +69,12 @@ var check = function(player, particlesModule, enemiesModule) {
         if (angledCollision(player, enemiesToTest[i])) {
             // console.log('HIT');
             enemiesToTest[i].alive = false;
+            if (enemiesToTest[i].type === 'power-icon.png') {
+                player.fuel += 10;
+            }
+            else {
+                player.health -= (enemiesToTest[i].width * enemiesToTest[i].height) / 100;
+            }
         }
     }
 

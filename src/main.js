@@ -1,4 +1,5 @@
 var loader = require('./loader.js');
+var score = 0;
 
 loader.done(function() {
     var raf = require('./raf');
@@ -44,12 +45,15 @@ loader.done(function() {
             player.draw(elapsed, ctx);
             menus.ingame(ctx, player.fuel, player.health);
 
-            if (player.dead || player.fuel <= 0) {
+            player.fuel -= 0.01;
+            score++;
+
+            if (player.health <= 0 || player.fuel <= 0) {
                 window.state = 'end';
             }
         }
         else if (window.state === 'end') {
-            menus.drawEnd(ctx);
+            menus.drawEnd(ctx, score);
         }
 
     });

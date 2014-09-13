@@ -15,12 +15,12 @@ module.exports = {
             ctx.font = '42pt Arial';
         });
     },
-    drawEnd: function(ctx) {
+    drawEnd: function(ctx, score) {
         ctx.fillStyle = '#0f0d20';
         ctx.fillRect(0, 0, 800, 600);
-        text.write('The end!', 'center', 300, function() {
+        text.write('The end! You scored ' + score + ' points!', 'center', 300, function() {
             ctx.fillStyle = 'white';
-            ctx.font = '42pt Arial';
+            ctx.font = '32pt Arial';
         });
     },
     ingame: function (ctx, fuel, health) {
