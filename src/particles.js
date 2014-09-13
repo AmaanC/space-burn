@@ -7,15 +7,11 @@ var Particle = function(x, y, angle, speed) {
     this.angle = angle;
     this.speed = speed;
     this.opacity = 1;
-    this.delay = Math.random() * 10;
+    this.delay = Math.ceil(Math.random() * 10);
     this.loop = function(ctx, player) {
         if (this.delay > 0) {
             this.delay--;
             return false;
-        }
-        if (this.delay === 1) {
-            this.x = player.x + player.width / 2;
-            this.y = player.y + player.height;
         }
         this.x += Math.sin(-this.angle) * speed;
         this.y += Math.cos(-this.angle) * speed;

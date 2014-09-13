@@ -1,10 +1,33 @@
 var enemies = [];
 
+var sprites = [
+    'rock-1.png',
+    'rock-2.png',
+    'rock-3.png',
+    'rock-4.png',
+    'rock-5.png',
+    'rock-alt-1.png',
+    'rock-alt-2.png',
+    'rock-alt-3.png',
+    'rock-alt-4.png',
+    'rock-alt-5.png',
+    'rock-odd-1.png',
+    'rock-odd-2.png',
+    'rock-odd-3.png',
+    'rock-odd-4.png'
+];
+
+var rocks = {};
+for (var i = 0; i < sprites.length; i++) {
+    rocks[sprites[i]] = new Image();
+    rocks[sprites[i]].src = 'images/' + sprites[i];
+}
+
 var rnd = function() {
     return Math.random();
 };
-var either = function(a, b) {
-    return rnd() < 0.5 ? a : b;
+var choose = function() {
+    return arguments[Math.floor(rnd() * arguments.length)];
 };
 
 var SPAWN_RANGE = 100;
@@ -18,11 +41,12 @@ var spawn = function(n) {
     var obj, targetY, targetX;
     for (var i = 0; i < n; i++) {
         obj = {
-            x: (either(-1, 1) * SPAWN_RANGE * rnd()) + (either(0, 1) * WIDTH),
-            y: (either(-1, 1) * SPAWN_RANGE * rnd()) + (either(0, 1) * HEIGHT),
+            x: (choose(-1, 1) * SPAWN_RANGE * rnd()) + (choose(0, 1) * WIDTH),
+            y: (choose(-1, 1) * SPAWN_RANGE * rnd()) + (choose(0, 1) * HEIGHT),
             width: rnd() * (MAX_WIDTH - MIN_WIDTH) + MIN_WIDTH,
             height: rnd() * (MAX_HEIGHT - MIN_HEIGHT) + MIN_HEIGHT,
-            speed: rnd() * (MAX_SPEED - MIN_SPEED) + MIN_SPEED
+            speed: rnd() * (MAX_SPEED - MIN_SPEED) + MIN_SPEED,
+            type: choose.apply(this, sprites)
         };
         targetY = rnd() * WIDTH;
         targetX = rnd() * HEIGHT;
@@ -38,7 +62,8 @@ var draw = function(elapsed, ctx, offsetX, offsetY) {
         enemy.x += Math.cos(enemy.angle) * enemy.speed - offsetX;
         enemy.y += Math.sin(enemy.angle) * enemy.speed - offsetY;
         ctx.fillStyle = 'red';
-        ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+        // ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+        ctx.drawImage(rocks[enemy.type], enemy.x, enemy.y);
     }
 };
 
