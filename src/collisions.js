@@ -1,49 +1,12 @@
-var bax;
-var bay;
-var dax;
-var day;
+var playerHitBox = {
+    x: 375,
+    y: 270,
+    width: 50,
+    height: 60
+};
 var angledCollision = function(player, enemy) {
     var colliding = false;
-
-    var x, y;
-
-    var playerPoints = [
-        {
-            x: player.topLeft[0],
-            y: player.topLeft[1]
-        },
-        {
-            x: player.topRight[0],
-            y: player.topRight[1]
-        },
-        {
-            x: player.bottomLeft[0],
-            y: player.bottomLeft[1]
-        },
-        {
-            x: player.bottomRight[0],
-            y: player.bottomRight[1]
-        }
-    ];
-
-    for (var i = 0; i < playerPoints; i++) {
-        x = playerPoints[i].x;
-        y = playerPoints[i].y;
-
-        if ((x - ax) * bax + (y - ay) * bay < 0.0) {
-            continue;
-        }
-        if ((x - bx) * bax + (y - by) * bay > 0.0) {
-            continue;
-        }
-        if ((x - ax) * dax + (y - ay) * day < 0.0) {
-            continue;
-        }
-        if ((x - dx) * dax + (y - dy) * day > 0.0) {
-            continue;
-        }
-        colliding = true;
-    }
+    colliding = aabb(playerHitBox, enemy);
     return colliding;
 };
 
@@ -101,19 +64,15 @@ var check = function(player, particlesModule, enemiesModule) {
     }
 
     // Collisions between the player and rocks
-    bax = 100;
-    bay = 0;
-    dax = 100;
-    day = 60;
     var enemiesToTest = inArea(playerArea, enemies);
     for (var i = 0; i < enemiesToTest.length; i++) {
         if (angledCollision(player, enemiesToTest[i])) {
             console.log('HIT');
+            enemiesToTest[i].alive = false;
         }
     }
 
     // Check for collisions between particles and enemies
-    var enemiesHurt = [];
     for (var i = 0; i < particles.length; i++) {
         inArea(particles[i], enemies, function(enemy) {
             if (particles[i].alive) {

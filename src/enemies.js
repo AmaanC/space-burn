@@ -41,7 +41,7 @@ var spawn = function(n) {
         targetX = rnd() * HEIGHT;
         obj.angle = rnd() * Math.PI * 2;
         ///////////////////////////////////// FIX THIS, THE WIDTH SHOULD BE DYNAMIC WHEN YOU ADD A PRELOADER
-        obj.width = 100;
+        obj.width = 70;
         obj.height = 60;
 
         if (rnd() > 0.5) {
