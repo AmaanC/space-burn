@@ -69,7 +69,7 @@ player.left = function(elapsed) {
     player.angle -= elapsed * turnSpeed * Math.PI;
 };
 player.flip = function() {
-    // player.angle += Math.PI;
+    player.angle += Math.PI;
 };
 
 player.draw = function(elapsed, ctx) {

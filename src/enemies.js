@@ -37,10 +37,16 @@ var WIDTH = 800, HEIGHT = 600;
 var spawn = function(n) {
     console.log('Spawned enemies:', n);
     var obj, targetY, targetX;
+    var signX, signY, posX, posY;
     for (var i = 0; i < n; i++) {
+        signX = choose(-1, 1);
+        signY = choose(-1, 1);
+        posX = signX === -1 ? 0 : 1;
+        posY = signY === -1 ? 0 : 1;
+
         obj = {
-            x: (choose(-1, 1) * SPAWN_RANGE * rnd()) + (choose(0, 1) * WIDTH),
-            y: (choose(-1, 1) * SPAWN_RANGE * rnd()) + (choose(0, 1) * HEIGHT),
+            x: (signX * SPAWN_RANGE * rnd()) + (posX * WIDTH),
+            y: (signY * SPAWN_RANGE * rnd()) + (posY * HEIGHT),
             speed: rnd() * (MAX_SPEED - MIN_SPEED) + MIN_SPEED,
             type: choose.apply(this, sprites),
             health: 100,
@@ -58,13 +64,16 @@ var spawn = function(n) {
 
 var loop = function(elapsed, ctx, offsetX, offsetY) {
     var enemy;
-    for (var i = 0, len = enemies.length; i < len; i++) {
+    for (var i = enemies.length - 1; i >= 0; i--) {
         enemy = enemies[i];
         if (enemy.alive) {
             enemy.x += Math.cos(enemy.angle) * enemy.speed - offsetX;
             enemy.y += Math.sin(enemy.angle) * enemy.speed - offsetY;
             ctx.fillStyle = 'red';
             ctx.drawImage(rocks[enemy.type], enemy.x, enemy.y);
+        }
+        else {
+            enemies.splice(i, 1);
         }
     }
 };

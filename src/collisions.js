@@ -8,16 +8,19 @@ var aabb = function (a, b) {
     return true;
 };
 
-var inArea = function(area, array, response) {
+var inArea = function(area, array, respColliding, respNotColliding) {
     var ret = [];
     var curElem;
     for (var i = 0; i < array.length; i++) {
         curElem = array[i];
         if (aabb(area, curElem)) {
             ret.push(curElem);
-            if (response) {
-                response(curElem);
+            if (respColliding) {
+                respColliding(curElem);
             }
+        }
+        else if (respNotColliding) {
+            respNotColliding(curElem);
         }
     }
     return ret;
@@ -30,11 +33,28 @@ var playerArea = {
     height: 150
 };
 
-var check = function(player, particles, enemies, ctx) {
-    // Check for collisions between particles and enemies
-    var enemiesToTest = inArea(playerArea, enemies);
-    console.log(enemiesToTest.length + ' hit');
+var camera = {
+    x: -400,
+    y: -300,
+    width: 1600,
+    height: 1200
+};
 
+var check = function(player, particlesModule, enemiesModule, ctx) {
+    var particles = particlesModule.array;
+    var enemies = enemiesModule.array;
+    // Manage enemy spawning
+    var enemiesInView = inArea(camera, enemies, undefined, function(enemy) {
+        enemy.alive = false;
+    });
+    if (enemiesInView.length < 30) {
+        enemiesModule.spawn(Math.random() * 100);
+    }
+
+    // Collisions between the player and rocks
+    var enemiesToTest = inArea(playerArea, enemies);
+
+    // Check for collisions between particles and enemies
     var enemiesHurt = [];
     for (var i = 0; i < particles.length; i++) {
         inArea(particles[i], enemies, function(enemy) {
@@ -43,8 +63,6 @@ var check = function(player, particles, enemies, ctx) {
             }
         });
     }
-
-    // ctx.fillRect(playerArea.x, playerArea.y, playerArea.width, playerArea.height);
 };
 
 module.exports = {
