@@ -28,6 +28,6 @@ raf.start(function(elapsed) {
 
     // Clear the screen
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    enemies.draw(elapsed, ctx);
+    enemies.draw(elapsed, ctx, player.offsetX, player.offsetY);
     player.draw(elapsed, ctx);
 });

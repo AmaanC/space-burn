@@ -31,12 +31,12 @@ var spawn = function(n) {
     }
 };
 
-var draw = function(elapsed, ctx) {
+var draw = function(elapsed, ctx, offsetX, offsetY) {
     var enemy;
     for (var i = 0, len = enemies.length; i < len; i++) {
         enemy = enemies[i];
-        enemy.x += Math.cos(enemy.angle) * enemy.speed;
-        enemy.y += Math.sin(enemy.angle) * enemy.speed;
+        enemy.x += Math.cos(enemy.angle) * enemy.speed - offsetX;
+        enemy.y += Math.sin(enemy.angle) * enemy.speed - offsetY;
         ctx.fillStyle = 'red';
         ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
     }

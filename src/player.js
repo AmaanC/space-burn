@@ -1,5 +1,7 @@
 var particles = require('./particles');
 
+var canvas = document.querySelector('#game');
+
 var player = {};
 
 player.idle = new Image();
@@ -8,11 +10,13 @@ player.flying = new Image();
 player.flying.src = 'images/astro-flying.png';
 player.state = 'idle';
 
-player.x = 0;
-player.y = 0;
 player.width = 52;
 player.height = 60;
+player.x = (canvas.width - player.width) / 2;
+player.y = (canvas.height - player.height) / 2;
 player.angle = 0;
+
+player.offsetX = player.offsetY = 0;
 
 
 // Half width, half height
@@ -34,8 +38,8 @@ player.gravity = function(elapsed) {
     dY -= grav;
 };
 player.move = function(elapsed, flying) {
-    player.x += dX;
-    player.y -= dY;
+    player.offsetX = dX;
+    player.offsetY = -dY;
     dX *= 0.99;
     dY *= 0.99;
 
@@ -72,19 +76,14 @@ player.flip = function() {
 };
 
 player.draw = function(elapsed, ctx) {
+    // Particles
     particles.draw(ctx, player);
 
+    // Player
     ctx.save();
-    ctx.fillStyle = 'black';
     ctx.translate(player.x + hW, player.y + hH);
     ctx.rotate(player.angle);
-    // ctx.fillRect(-hW, -hH, player.width, player.height);
     ctx.drawImage(player[player.state], -hW, -hH);
-    // Flames
-    ctx.fillStyle = 'red';
-    ctx.fillRect(-hW, hH, player.width, 5);
     ctx.restore();
-
-    // ctx.fillRect(player.x, player.y, 10, 10);
 };
 module.exports = player;
