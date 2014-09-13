@@ -15,7 +15,7 @@ loader.done(function() {
     window.state = 'menu';
     raf.start(function(elapsed) {
         if (window.state === 'menu') {
-            menus.drawMenu(elapsed, ctx);
+            menus.drawMenu(ctx);
         }
         else if (window.state === 'game') {
             player.gravity(elapsed);
@@ -41,6 +41,14 @@ loader.done(function() {
             enemies.loop(elapsed, ctx, player.offsetX, player.offsetY);
             particles.draw(elapsed, ctx, player);
             player.draw(elapsed, ctx);
+            menus.ingame(ctx, player.fuel, player.health);
+
+            if (player.dead || player.fuel <= 0) {
+                window.state = 'end';
+            }
+        }
+        else if (window.state === 'end') {
+            menus.drawEnd(ctx);
         }
 
     });

@@ -67,7 +67,7 @@ var check = function(player, particlesModule, enemiesModule) {
     var enemiesToTest = inArea(playerArea, enemies);
     for (var i = 0; i < enemiesToTest.length; i++) {
         if (angledCollision(player, enemiesToTest[i])) {
-            console.log('HIT');
+            // console.log('HIT');
             enemiesToTest[i].alive = false;
         }
     }

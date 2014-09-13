@@ -14,7 +14,7 @@ var MIN_SPEED = 0.3, MAX_SPEED = 2;
 var WIDTH = 800, HEIGHT = 600;
 
 var spawn = function(n) {
-    console.log('Spawned enemies:', n);
+    // console.log('Spawned enemies:', n);
     var obj, targetY, targetX;
     var signX, signY, posX, posY;
     for (var i = 0; i < n; i++) {
@@ -23,7 +23,6 @@ var spawn = function(n) {
             y: (rnd() * HEIGHT),
             speed: rnd() * (MAX_SPEED - MIN_SPEED) + MIN_SPEED,
             type: choose.apply(this, loader.get('rock')),
-            health: 100,
             alive: true
         };
         targetY = rnd() * WIDTH;

@@ -8,6 +8,8 @@ player.idle.src = 'images/astro.png';
 player.flying = new Image();
 player.flying.src = 'images/astro-flying.png';
 player.state = 'idle';
+player.fuel = 100;
+player.health = 100;
 
 player.width = 52;
 player.height = 60;
