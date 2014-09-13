@@ -1,5 +1,4 @@
 var loader = require('./loader.js');
-var score = 0;
 
 loader.done(function() {
     var raf = require('./raf');
@@ -46,15 +45,28 @@ loader.done(function() {
             menus.ingame(ctx, player.fuel, player.health);
 
             player.fuel -= 0.01;
-            score++;
+            player.score++;
 
             if (player.health <= 0 || player.fuel <= 0) {
                 window.state = 'end';
             }
         }
         else if (window.state === 'end') {
-            menus.drawEnd(ctx, score);
+            menus.drawEnd(ctx, player.score);
         }
 
     });
 });
+
+
+document.body.addEventListener('click', function() {
+    if (window.state === 'menu') {
+        window.state = 'game';
+    }
+    else if (window.state === 'end') {
+        window.state = 'game';
+        player.score = 0;
+        player.reset();
+        enemies.reset();
+    }
+}, false);

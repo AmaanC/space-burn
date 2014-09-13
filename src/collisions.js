@@ -83,6 +83,7 @@ var check = function(player, particlesModule, enemiesModule) {
         inArea(particles[i], enemies, function(enemy) {
             if (particles[i].alive) {
                 enemy.alive = false;
+                player.score += (enemy.width * enemy.height) / 100
             }
         });
     }

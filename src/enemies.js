@@ -61,5 +61,8 @@ var loop = function(elapsed, ctx, offsetX, offsetY) {
 module.exports = {
     loop: loop,
     array: enemies,
-    spawn: spawn
+    spawn: spawn,
+    reset: function() {
+        enemies = [];
+    }
 };

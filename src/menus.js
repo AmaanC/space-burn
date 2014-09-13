@@ -1,36 +1,25 @@
 var loader = require('./loader.js');
 var text = require('./text.js');
-document.body.addEventListener('click', function() {
-    if (window.state === 'menu') {
-        window.state = 'game';
-    }
-}, false);
 
 module.exports = {
     drawMenu: function(ctx) {
         ctx.fillStyle = '#0f0d20';
         ctx.fillRect(0, 0, 800, 600);
 
-        ctx.drawImage(loader.images['logo.png'], 314, 130);
-        text.write('Click to Play', 'center', 300, function() {
-            ctx.fillStyle = 'white';
-            ctx.font = '42pt Arial';
-        });
-        text.write('Art by the brilliant @mikedidthis', 'center', 500, function() {
-            ctx.fillStyle = 'white';
-            ctx.font = '20pt Arial';
-        });
-        text.write('Code by @AmaanC', 'center', 540, function() {
-            ctx.fillStyle = 'white';
-            ctx.font = '20pt Arial';
-        });
+        ctx.drawImage(loader.images['logo.png'], 314, 180);
+        ctx.drawImage(loader.images['text-play.png'], 333, 300);
+        ctx.drawImage(loader.images['text-credits.png'], 287, 500);
     },
     drawEnd: function(ctx, score) {
         ctx.fillStyle = '#0f0d20';
         ctx.fillRect(0, 0, 800, 600);
-        text.write('The end! You scored ' + score + ' points!', 'center', 300, function() {
+        text.write('The end! You scored ' + Math.round(score) + ' points!', 'center', 300, function() {
             ctx.fillStyle = 'white';
             ctx.font = '32pt Arial';
+        });
+        text.write('Click to play again', 'center', 500, function() {
+            ctx.fillStyle = 'white';
+            ctx.font = '22pt Arial';
         });
     },
     ingame: function (ctx, fuel, health) {

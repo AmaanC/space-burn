@@ -10,6 +10,7 @@ player.flying.src = 'images/astro-flying.png';
 player.state = 'idle';
 player.fuel = 100;
 player.health = 100;
+player.score = 0;
 
 player.width = 52;
 player.height = 60;
@@ -34,6 +35,12 @@ var lim = 10; // Speed limit
 var turnSpeed = 2.2;
 var grav = 0.08;
 // NO MORE CONFIGURING! ------------------------------
+
+player.reset = function() {
+    player.angle = player.offsetX = player.offsetY = dX = dY = speed = dSpeed = 0;
+    player.health = player.fuel = 100;
+    player.move();
+};
 
 player.gravity = function(elapsed) {
     dY -= grav;
