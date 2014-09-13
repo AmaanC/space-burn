@@ -38,11 +38,13 @@ var check = function(player, particles, enemies, ctx) {
     var enemiesHurt = [];
     for (var i = 0; i < particles.length; i++) {
         inArea(particles[i], enemies, function(enemy) {
-            enemy.alive = false;
+            if (particles[i].alive) {
+                enemy.alive = false;
+            }
         });
     }
 
-    ctx.fillRect(playerArea.x, playerArea.y, playerArea.width, playerArea.height);
+    // ctx.fillRect(playerArea.x, playerArea.y, playerArea.width, playerArea.height);
 };
 
 module.exports = {
