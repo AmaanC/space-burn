@@ -14,7 +14,7 @@ var Particle = function(x, y, angle, speed) {
             return false;
         }
         if (this.delay === 1) {
-            this.x = player.x;
+            this.x = player.x + player.width / 2;
             this.y = player.y + player.height;
         }
         this.x += Math.sin(-this.angle) * speed;
