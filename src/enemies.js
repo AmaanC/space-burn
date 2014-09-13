@@ -46,30 +46,30 @@ var spawn = function(n) {
             width: rnd() * (MAX_WIDTH - MIN_WIDTH) + MIN_WIDTH,
             height: rnd() * (MAX_HEIGHT - MIN_HEIGHT) + MIN_HEIGHT,
             speed: rnd() * (MAX_SPEED - MIN_SPEED) + MIN_SPEED,
-            type: choose.apply(this, sprites)
+            type: choose.apply(this, sprites),
+            health: 100
         };
         targetY = rnd() * WIDTH;
         targetX = rnd() * HEIGHT;
-        obj.angle = Math.atan2(targetY - obj.y, targetX - obj.x);
+        obj.angle = rnd() * Math.PI * 2;
         enemies.push(obj);
     }
 };
 
-var draw = function(elapsed, ctx, offsetX, offsetY) {
+var loop = function(elapsed, ctx, offsetX, offsetY) {
     var enemy;
     for (var i = 0, len = enemies.length; i < len; i++) {
         enemy = enemies[i];
         enemy.x += Math.cos(enemy.angle) * enemy.speed - offsetX;
         enemy.y += Math.sin(enemy.angle) * enemy.speed - offsetY;
         ctx.fillStyle = 'red';
-        // ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
         ctx.drawImage(rocks[enemy.type], enemy.x, enemy.y);
     }
 };
 
 
 module.exports = {
-    draw: draw,
+    loop: loop,
     array: enemies,
     spawn: spawn
 };

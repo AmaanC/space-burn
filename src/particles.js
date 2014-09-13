@@ -37,14 +37,14 @@ var angle = 0;
 var createParticles = function(x, y, playerAngle, range, speed, n) {
     // console.log('Creating', particles);
     for (var i = 0; i < n; i++) {
-        angle = playerAngle - range + (Math.random() * 2 * range);
         if (particles[i] && !particles[i].alive || !particles[i]) {
+            angle = playerAngle - range + (Math.random() * 2 * range);
             particles[i] = new Particle(x, y, angle, speed);
         }
     }
 };
 
-var draw = function(ctx, player) {
+var draw = function(elapsed, ctx, player) {
     for (var i = 0; i < particles.length; i++) {
         particles[i].loop(ctx, player);
     }
@@ -52,5 +52,6 @@ var draw = function(ctx, player) {
 
 module.exports = {
     createParticles: createParticles,
-    draw: draw
+    draw: draw,
+    array: particles
 };

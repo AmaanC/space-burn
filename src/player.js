@@ -1,8 +1,6 @@
-var particles = require('./particles');
-
 var canvas = document.querySelector('#game');
 
-var player = {};
+window.player = {};
 
 player.idle = new Image();
 player.idle.src = 'images/astro.png';
@@ -63,7 +61,6 @@ player.up = function(elapsed) {
         speed = -lim;
     }
 
-    particles.createParticles(player.x + hW, player.y + player.height, player.angle, Math.PI / 10, 10, 10);
 };
 player.right = function(elapsed) {
     player.angle += elapsed * turnSpeed * Math.PI;
@@ -72,13 +69,10 @@ player.left = function(elapsed) {
     player.angle -= elapsed * turnSpeed * Math.PI;
 };
 player.flip = function() {
-    player.angle += Math.PI;
+    // player.angle += Math.PI;
 };
 
 player.draw = function(elapsed, ctx) {
-    // Particles
-    particles.draw(ctx, player);
-
     // Player
     ctx.save();
     ctx.translate(player.x + hW, player.y + hH);
