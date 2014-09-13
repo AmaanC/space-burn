@@ -1,4 +1,11 @@
 var imageNames = [
+    'astro.png',
+    'astro-flying.png',
+    'health-bar-icon.png',
+    'logo.png',
+    'power-bar-icon.png',
+    'power-icon.png',
+    'rock-5.png',
     'rock-alt-5.png',
     'rock-odd-1.png',
     'rock-odd-3.png',
@@ -23,5 +30,14 @@ var done = function(cb) {
 module.exports = {
     list: imageNames,
     images: images,
-    done: done
+    done: done,
+    get: function(string) {
+        var ret = [];
+        for(var i = 0; i < imageNames.length; i++) {
+            if (imageNames[i].indexOf(string) !== -1) {
+                ret.push(imageNames[i]);
+            }
+        }
+        return ret;
+    }
 };

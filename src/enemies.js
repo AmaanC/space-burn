@@ -1,17 +1,6 @@
 var enemies = [];
 
-var sprites = [
-    'rock-alt-5.png',
-    'rock-odd-1.png',
-    'rock-odd-3.png',
-    'rock-odd-4.png'
-];
-
-var rocks = {};
-for (var i = 0; i < sprites.length; i++) {
-    rocks[sprites[i]] = new Image();
-    rocks[sprites[i]].src = 'images/' + sprites[i];
-}
+var loader = require('./loader.js');
 
 var rnd = function() {
     return Math.random();
@@ -33,16 +22,15 @@ var spawn = function(n) {
             x: (rnd() * WIDTH),
             y: (rnd() * HEIGHT),
             speed: rnd() * (MAX_SPEED - MIN_SPEED) + MIN_SPEED,
-            type: choose.apply(this, sprites),
+            type: choose.apply(this, loader.get('rock')),
             health: 100,
             alive: true
         };
         targetY = rnd() * WIDTH;
         targetX = rnd() * HEIGHT;
         obj.angle = rnd() * Math.PI * 2;
-        ///////////////////////////////////// FIX THIS, THE WIDTH SHOULD BE DYNAMIC WHEN YOU ADD A PRELOADER
-        obj.width = 70;
-        obj.height = 60;
+        obj.width = loader.images[obj.type].width;
+        obj.height = loader.images[obj.type].height;
 
         if (rnd() > 0.5) {
             obj.x += choose(-1, 1) * (WIDTH + obj.width);
@@ -62,7 +50,7 @@ var loop = function(elapsed, ctx, offsetX, offsetY) {
             enemy.x += Math.cos(enemy.angle) * enemy.speed - offsetX;
             enemy.y += Math.sin(enemy.angle) * enemy.speed - offsetY;
             ctx.fillStyle = 'red';
-            ctx.drawImage(rocks[enemy.type], enemy.x, enemy.y);
+            ctx.drawImage(loader.images[enemy.type], enemy.x, enemy.y);
         }
         else {
             enemies.splice(i, 1);
