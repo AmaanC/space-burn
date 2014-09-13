@@ -24,7 +24,7 @@ raf.start(function(elapsed) {
         player.left(elapsed);
     }
 
-    collisions.check(player, particles, enemies, ctx);
+    collisions.check(player, particles, enemies);
 
     // Clear the screen
     ctx.clearRect(0, 0, canvas.width, canvas.height);

@@ -40,7 +40,7 @@ var camera = {
     height: 1200
 };
 
-var check = function(player, particlesModule, enemiesModule, ctx) {
+var check = function(player, particlesModule, enemiesModule) {
     var particles = particlesModule.array;
     var enemies = enemiesModule.array;
     // Manage enemy spawning
