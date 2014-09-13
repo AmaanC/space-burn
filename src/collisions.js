@@ -1,4 +1,9 @@
-var aabb = function (a, b) {
+var angledCollision = function(player, enemy) {
+    var colliding = false;
+    
+};
+
+var aabb = function(a, b) {
     if (
         Math.abs(a.x + a.width / 2 - b.x - b.width / 2) > (a.width + b.width) / 2 ||
         Math.abs(a.y + a.height / 2 - b.y - b.height / 2) > (a.height + b.height) / 2
@@ -53,6 +58,9 @@ var check = function(player, particlesModule, enemiesModule) {
 
     // Collisions between the player and rocks
     var enemiesToTest = inArea(playerArea, enemies);
+    for (var i = 0; i < enemiesToTest.length; i++) {
+        angledCollision(player, enemiesToTest[i]);
+    }
 
     // Check for collisions between particles and enemies
     var enemiesHurt = [];

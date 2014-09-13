@@ -1,3 +1,4 @@
+var Transform = require('./transform.js');
 var canvas = document.querySelector('#game');
 
 window.player = {};
@@ -72,12 +73,22 @@ player.flip = function() {
     player.angle += Math.PI;
 };
 
+var t = new Transform();
+
 player.draw = function(elapsed, ctx) {
     // Player
     ctx.save();
     ctx.translate(player.x + hW, player.y + hH);
+    t.translate(player.x + hW, player.y + hH);
     ctx.rotate(player.angle);
+    t.rotate(player.angle);
     ctx.drawImage(player[player.state], -hW, -hH);
     ctx.restore();
+
+    player.topLeft = t.transformPoint(-hW, -hH);
+    player.topRight = t.transformPoint(hW, -hH);
+    player.bottomLeft = t.transformPoint(-hW, hH);
+    player.bottomRight = t.transformPoint(hW, hH);
+    t.reset();
 };
 module.exports = player;
