@@ -39,14 +39,9 @@ var spawn = function(n) {
     var obj, targetY, targetX;
     var signX, signY, posX, posY;
     for (var i = 0; i < n; i++) {
-        signX = choose(-1, 1);
-        signY = choose(-1, 1);
-        posX = signX === -1 ? 0 : 1;
-        posY = signY === -1 ? 0 : 1;
-
         obj = {
-            x: (signX * SPAWN_RANGE * rnd()) + (posX * WIDTH),
-            y: (signY * SPAWN_RANGE * rnd()) + (posY * HEIGHT),
+            x: (rnd() * WIDTH),
+            y: (rnd() * HEIGHT),
             speed: rnd() * (MAX_SPEED - MIN_SPEED) + MIN_SPEED,
             type: choose.apply(this, sprites),
             health: 100,
@@ -58,6 +53,13 @@ var spawn = function(n) {
         ///////////////////////////////////// FIX THIS, THE WIDTH SHOULD BE DYNAMIC WHEN YOU ADD A PRELOADER
         obj.width = 100;
         obj.height = 60;
+
+        if (rnd() > 0.5) {
+            obj.x += choose(-1, 1) * (WIDTH + obj.width);
+        }
+        else {
+            obj.y += choose(-1, 1) * (HEIGHT + obj.height);
+        }
         enemies.push(obj);
     }
 };
