@@ -1,36 +1,47 @@
-var raf = require('./raf');
-var player = require('./player');
-var key = require('./keys');
-var particles = require('./particles');
-var enemies = require('./enemies');
-var collisions = require('./collisions');
+var loader = require('./loader.js');
 
-var canvas = document.querySelector('#game');
-var ctx = canvas.getContext('2d');
+loader.done(function() {
+    var raf = require('./raf');
+    var player = require('./player');
+    var key = require('./keys');
+    var particles = require('./particles');
+    var enemies = require('./enemies');
+    var collisions = require('./collisions');
+    var menus = require('./menus.js');
 
-raf.start(function(elapsed) {
-    player.gravity(elapsed);
-    if (key.up()) {
-        player.up(elapsed);
-        particles.createParticles(player.x + player.width / 2, player.y + player.height, player.angle, Math.PI / 10, 10, 10);
-    } else {
-        player.move(elapsed);
-    }
+    var canvas = document.querySelector('#game');
+    var ctx = canvas.getContext('2d');
 
-    if (key.right()) {
-        player.right(elapsed);
-    }
-    if (key.left()) {
-        player.left(elapsed);
-    }
+    window.state = 'menu';
+    raf.start(function(elapsed) {
+        if (window.state === 'menu') {
+            menus.drawMenu(elapsed, ctx);
+        }
+        else if (window.state === 'game') {
+            player.gravity(elapsed);
+            if (key.up()) {
+                player.up(elapsed);
+                particles.createParticles(player.x + player.width / 2, player.y + player.height, player.angle, Math.PI / 10, 10, 10);
+            } else {
+                player.move(elapsed);
+            }
 
-    collisions.check(player, particles, enemies);
+            if (key.right()) {
+                player.right(elapsed);
+            }
+            if (key.left()) {
+                player.left(elapsed);
+            }
 
-    // Clear the screen
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+            collisions.check(player, particles, enemies);
 
-    enemies.loop(elapsed, ctx, player.offsetX, player.offsetY);
-    particles.draw(elapsed, ctx, player);
-    player.draw(elapsed, ctx);
+            // Clear the screen
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+            enemies.loop(elapsed, ctx, player.offsetX, player.offsetY);
+            particles.draw(elapsed, ctx, player);
+            player.draw(elapsed, ctx);
+        }
+
+    });
 });
