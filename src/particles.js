@@ -1,6 +1,7 @@
 var particles = [];
 var W = 7, H = 7;
-var Particle = function(x, y, speed) {
+var DEC_RATE = 0.1; // Default decrease rate. Higher rate -> particles go faster
+var Particle = function(x, y, speed, decRate) {
     this.alive = true;
     this.x = x;
     this.y = y;
@@ -9,6 +10,7 @@ var Particle = function(x, y, speed) {
     this.angle = 0;
     this.speed = speed;
     this.opacity = 1;
+    this.decRate = decRate || DEC_RATE;
     this.delay = Math.ceil(Math.random() * 10);
     this.loop = function(ctx, player) {
         if (this.delay > 0) {
@@ -20,7 +22,7 @@ var Particle = function(x, y, speed) {
         }
         this.x += Math.sin(-this.angle) * speed;
         this.y += Math.cos(-this.angle) * speed;
-        this.opacity -= 0.1;
+        this.opacity -= this.decRate;
         if (this.opacity <= 0) {
             this.opacity = 0;
             this.alive = false;
