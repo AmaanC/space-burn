@@ -1,5 +1,5 @@
 var particles = [];
-var W = 5, H = 5;
+var W = 7, H = 7;
 var Particle = function(x, y, angle, speed) {
     this.alive = true;
     this.x = x;
@@ -42,6 +42,7 @@ var createParticles = function(x, y, playerAngle, range, speed, n) {
         if (particles[i] && !particles[i].alive || !particles[i]) {
             angle = playerAngle - range + (Math.random() * 2 * range);
             particles[i] = new Particle(x, y, angle, speed);
+            particles[i].player = true;
         }
     }
 };

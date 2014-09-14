@@ -21,7 +21,7 @@ loader.done(function() {
             player.gravity(elapsed);
             if (key.up()) {
                 player.up(elapsed);
-                particles.createParticles(player.x + player.width / 2, player.y + player.height, player.angle, Math.PI / 10, 10, 10);
+                particles.createParticles(player.x + player.width / 2, player.y + player.height / 2, player.angle, Math.PI / 10, 10, 10);
             } else {
                 player.move(elapsed);
             }
