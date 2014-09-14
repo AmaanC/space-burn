@@ -55,5 +55,8 @@ var draw = function(elapsed, ctx, player) {
 module.exports = {
     createParticles: createParticles,
     draw: draw,
-    array: particles
+    array: particles,
+    reset: function() {
+        particles.length = 0;
+    }
 };

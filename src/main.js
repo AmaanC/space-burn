@@ -1,16 +1,16 @@
 var loader = require('./loader.js');
 
-loader.done(function() {
-    var raf = require('./raf');
-    var player = require('./player');
-    var key = require('./keys');
-    var particles = require('./particles');
-    var enemies = require('./enemies');
-    var collisions = require('./collisions');
-    var menus = require('./menus.js');
+var raf = require('./raf');
+var player = require('./player');
+var key = require('./keys');
+var particles = require('./particles');
+var enemies = require('./enemies');
+var collisions = require('./collisions');
+var menus = require('./menus.js');
 
-    var canvas = document.querySelector('#game');
-    var ctx = canvas.getContext('2d');
+var canvas = document.querySelector('#game');
+var ctx = canvas.getContext('2d');
+loader.done(function() {
 
     window.state = 'menu';
     raf.start(function(elapsed) {
@@ -58,8 +58,8 @@ loader.done(function() {
     });
 });
 
-
-document.body.addEventListener('click', function() {
+var changeState = function() {
+    console.log('Called');
     if (window.state === 'menu') {
         window.state = 'game';
     }
@@ -67,6 +67,14 @@ document.body.addEventListener('click', function() {
         window.state = 'game';
         player.score = 0;
         player.reset();
+        particles.reset();
         enemies.reset();
+    }
+};
+
+canvas.addEventListener('click', changeState, false);
+document.body.addEventListener('keydown', function(e) {
+    if (e.keyCode === 13) {
+        changeState();
     }
 }, false);

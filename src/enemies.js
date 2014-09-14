@@ -63,6 +63,6 @@ module.exports = {
     array: enemies,
     spawn: spawn,
     reset: function() {
-        enemies = [];
+        enemies.length = 0;
     }
 };
