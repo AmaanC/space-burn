@@ -1,17 +1,20 @@
 var particles = [];
 var W = 7, H = 7;
-var Particle = function(x, y, angle, speed) {
+var Particle = function(x, y, speed) {
     this.alive = true;
     this.x = x;
     this.y = y;
     this.width = W;
     this.height = H;
-    this.angle = angle;
+    this.angle = 0;
     this.speed = speed;
     this.opacity = 1;
     this.delay = Math.ceil(Math.random() * 10);
     this.loop = function(ctx, player) {
         if (this.delay > 0) {
+            if (this.delay <= 1) {
+                this.angle = player.angle - this.range + (Math.random() * 2 * this.range);;
+            }
             this.delay--;
             return false;
         }
@@ -40,8 +43,8 @@ var createParticles = function(x, y, playerAngle, range, speed, n) {
     // console.log('Creating', particles);
     for (var i = 0; i < n; i++) {
         if (particles[i] && !particles[i].alive || !particles[i]) {
-            angle = playerAngle - range + (Math.random() * 2 * range);
-            particles[i] = new Particle(x, y, angle, speed);
+            particles[i] = new Particle(x, y, speed);
+            particles[i].range = range;
             particles[i].player = true;
         }
     }
