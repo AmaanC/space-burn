@@ -1,4 +1,4 @@
-# JS13KGames - 2014
+# JS13KGames - 2014 - [Play here](http://js13kgames.com/entries/space-burn)
 
 ##Controls
 
