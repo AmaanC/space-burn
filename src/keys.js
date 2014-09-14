@@ -5,6 +5,9 @@ document.body.addEventListener('keydown', function(e) {
         player.flip();
         e.preventDefault();
     }
+    else if (e.keyCode >= 37 && e.keyCode <= 40) {
+        e.preventDefault();
+    }
     keys[e.keyCode] = true;
 });
 document.body.addEventListener('keyup', function(e) {

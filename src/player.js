@@ -56,7 +56,7 @@ player.move = function(elapsed, flying) {
     }
 };
 player.up = function(elapsed) {
-    player.fuel -= 0.1;
+    player.fuel -= 0.2;
     player.state = 'flying';
     speed += acc;
     dSpeed = elapsed * speed;

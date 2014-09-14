@@ -22,7 +22,7 @@ module.exports = {
             ctx.font = '22pt Arial';
         });
     },
-    ingame: function (ctx, fuel, health) {
+    ingame: function (ctx, fuel, health, score) {
         ctx.drawImage(loader.images['power-bar-icon.png'], 30, 500);
         ctx.fillStyle = 'orange';
         ctx.fillRect(30, 490 - fuel, 20, fuel);
@@ -31,5 +31,9 @@ module.exports = {
         ctx.drawImage(loader.images['health-bar-icon.png'], 70, 500);
         ctx.fillStyle = 'red';
         ctx.fillRect(70, 490 - health, 20, health);
+
+        ctx.font = '12pt Arial';
+        ctx.fillStyle = 'white';
+        ctx.fillText('Score: ' + Math.round(score), 27, 550);
     }
 };

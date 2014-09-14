@@ -42,10 +42,9 @@ loader.done(function() {
             enemies.loop(elapsed, ctx, player.offsetX, player.offsetY);
             particles.draw(elapsed, ctx, player);
             player.draw(elapsed, ctx);
-            menus.ingame(ctx, player.fuel, player.health);
+            menus.ingame(ctx, player.fuel, player.health, player.score);
 
-            player.fuel -= 0.01;
-            player.score++;
+            player.score += 0.1;
 
             if (player.health <= 0 || player.fuel <= 0) {
                 window.state = 'end';
