@@ -33,7 +33,7 @@ var dX = 0, dY = 0;
 var acc = 7; // Acceleration
 var lim = 10; // Speed limit
 var turnSpeed = 2.2;
-var grav = 0.08;
+var grav = 0.03;
 // NO MORE CONFIGURING! ------------------------------
 
 player.reset = function() {

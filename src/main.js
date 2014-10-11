@@ -14,7 +14,7 @@ var ctx = canvas.getContext('2d');
 
 var sfx = ['collect', 'collide', 'explode_meteor', 'jetpack'];
 loader.done(function() {
-    // audio.mute(); // Because I don't want it autoplaying while I develop it!
+    audio.mute(); // Because I don't want it autoplaying while I develop it!
 
     window.state = 'menu';
     raf.start(function(elapsed) {
