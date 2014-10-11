@@ -7,10 +7,12 @@ var particles = require('./particles');
 var enemies = require('./enemies');
 var collisions = require('./collisions');
 var menus = require('./menus.js');
+var audio = require('./audio.js');
 
 var canvas = document.querySelector('#game');
 var ctx = canvas.getContext('2d');
 loader.done(function() {
+    audio.stop(); // Because I don't want it autoplaying while I develop it!
 
     window.state = 'menu';
     raf.start(function(elapsed) {
@@ -33,7 +35,7 @@ loader.done(function() {
                 player.left(elapsed);
             }
 
-            collisions.check(player, particles, enemies);
+            collisions.check(player, enemies);
 
             // Clear the screen
             ctx.fillStyle = '#0f0d20';

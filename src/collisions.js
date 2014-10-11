@@ -1,3 +1,5 @@
+var particlesModule = require('./particles');
+
 var playerHitBox = {
     x: 375,
     y: 270,
@@ -52,7 +54,7 @@ var camera = {
     height: 1200
 };
 
-var check = function(player, particlesModule, enemiesModule) {
+var check = function(player, enemiesModule) {
     var particles = particlesModule.array;
     var enemies = enemiesModule.array;
     // Manage enemy spawning

@@ -1,9 +1,9 @@
 {
   "private": true,
-  "name": "js13k-2014",
+  "name": "space-burn",
   "version": "0.1.0",
   "author": "Amaan Cheval <amaan.cheval@gmail.com>",
-  "repository": "AmaanC/js13k-2014",
+  "repository": "AmaanC/space-burn",
   "devDependencies": {
     "browserify": "^5.10.0",
     "bundle-collapser": "^1.1.0",

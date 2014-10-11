@@ -10,24 +10,24 @@
         <a href='http://github.com/AmaanC/space-burn/'>Github repo</a>
 
         <!-- All the audio! -->
-        <audio autoplay>
+        <audio id='spacetronaut' autoplay data-loop='true'>
           <source src='music/spacetronaut.mp3' type='audio/mpeg'>
           <source src='music/spacetronaut.ogg' type='audio/ogg'>
         </audio>
-        <audio preload='auto'>
+        <audio id='spacewin' preload='auto' data-loop='true'>
           <source src='music/spacewin.mp3' type='audio/mpeg'>
           <source src='music/spacewin.ogg' type='audio/ogg'>
         </audio>
-        <audio preload='auto'>
+        <audio id='spacefail' preload='auto' data-loop='true'>
           <source src='music/spacefail.mp3' type='audio/mpeg'>
           <source src='music/spacefail.ogg' type='audio/ogg'>
         </audio>
-        <audio preload='auto'>
+        <audio id='shop' preload='auto' data-loop='true'>
           <source src='music/shop.mp3' type='audio/mpeg'>
           <source src='music/shop.ogg' type='audio/ogg'>
         </audio>
         <!-- End of all the audio! -->
-        
+
         <canvas id="game" width="800" height="600"></canvas>
         <script src="build.js"></script>
     </body>
