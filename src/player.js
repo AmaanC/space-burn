@@ -1,4 +1,4 @@
-var Transform = require('./transform.js');
+// var Transform = require('./transform.js');
 var canvas = document.querySelector('#game');
 
 window.player = {};

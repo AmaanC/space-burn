@@ -58,7 +58,6 @@ loader.done(function() {
 });
 
 var changeState = function() {
-    console.log('Called');
     if (window.state === 'menu') {
         window.state = 'game';
     }
