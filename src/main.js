@@ -11,8 +11,10 @@ var audio = require('./audio.js');
 
 var canvas = document.querySelector('#game');
 var ctx = canvas.getContext('2d');
+
+var sfx = ['collect', 'collide', 'explode_meteor', 'jetpack'];
 loader.done(function() {
-    audio.stop(); // Because I don't want it autoplaying while I develop it!
+    // audio.mute(); // Because I don't want it autoplaying while I develop it!
 
     window.state = 'menu';
     raf.start(function(elapsed) {
@@ -22,9 +24,11 @@ loader.done(function() {
         else if (window.state === 'game') {
             player.gravity(elapsed);
             if (key.up()) {
+                audio.play('jetpack');
                 player.up(elapsed);
                 particles.createParticles(player.x + player.width / 2, player.y + player.height / 2, player.angle, Math.PI / 10, 10, 10);
             } else {
+                audio.pause('jetpack');
                 player.move(elapsed);
             }
 
@@ -53,6 +57,7 @@ loader.done(function() {
             }
         }
         else if (window.state === 'end') {
+            audio.pause(sfx);
             menus.drawEnd(ctx, player.score);
         }
 

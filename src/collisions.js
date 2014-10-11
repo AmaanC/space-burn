@@ -72,9 +72,11 @@ var check = function(player, enemiesModule) {
             // console.log('HIT');
             enemiesToTest[i].alive = false;
             if (enemiesToTest[i].type === 'power-icon.png') {
+                audio.play('collect');
                 player.fuel += 10;
             }
             else {
+                audio.play('collide');
                 player.health -= (enemiesToTest[i].width * enemiesToTest[i].height) / 100;
             }
         }
@@ -85,7 +87,13 @@ var check = function(player, enemiesModule) {
         inArea(particles[i], enemies, function(enemy) {
             if (particles[i].alive) {
                 enemy.alive = false;
-                player.score += (enemy.width * enemy.height) / 100
+                if (enemy.type === 'power-icon.png') {
+                    audio.play('collect');
+                }
+                else {
+                    audio.play('explode_meteor');
+                }
+                player.score += (enemy.width * enemy.height) / 100;
             }
         });
     }

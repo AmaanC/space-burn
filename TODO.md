@@ -9,3 +9,9 @@ I'm going to try to maintain this as a document listing things I need to remembe
 - Ray of hope - Collect a health pack when you're running low
 - Score of X or more
 - Destroyer of rocks - destroy 500 rocks in total
+
+Player would get a bonus for doing all available objectives (most likely 3 at a time) in one go
+
+###Other
+- Screenshake
+- White flashes on jetpack and on explosions
