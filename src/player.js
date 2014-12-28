@@ -8,9 +8,15 @@ player.idle.src = 'images/astro.png';
 player.flying = new Image();
 player.flying.src = 'images/astro-flying.png';
 player.state = 'idle';
-player.fuel = 100;
-player.health = 100;
-player.score = 0;
+
+var playerDefaults = {
+    score: 0,
+    angle: 0,
+    offsetY: 0,
+    offsetX: 0,
+    health: 100,
+    fuel: 100
+};
 
 player.width = 52;
 player.height = 60;
@@ -36,12 +42,16 @@ var turnSpeed = 2.2;
 var grav = 0.03;
 // NO MORE CONFIGURING! ------------------------------
 
+
+
 player.reset = function() {
-    player.angle = player.offsetX = player.offsetY = dX = dY = speed = dSpeed = 0;
-    player.health = player.fuel = 100;
+    dX = dY = speed = dSpeed = 0;
+    var keys = Object.keys(playerDefaults);
+    for (var i = 0; i < keys.length; i++) {
+        player[keys[i]] = playerDefaults[keys[i]];
+    }
     player.move();
 };
-
 player.gravity = function(elapsed) {
     dY -= grav;
 };
@@ -102,4 +112,7 @@ player.draw = function(elapsed, ctx) {
     // t.reset();
 
 };
+
+player.reset();
+
 module.exports = player;
