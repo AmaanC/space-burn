@@ -79,14 +79,20 @@ var check = function(player, foModule) {
             else {
                 audio.play('collide');
                 player.health -= (foToTest[i].width * foToTest[i].height) / 100;
+                console.log('Collision particles');
+                particlesModule.createParticles(fo.x, fo.y, 0, 2 * Math.PI, fo.speed, 100, true);
             }
         }
     }
 
     // Check for collisions between particles and fo
     for (var i = 0; i < particles.length; i++) {
+        if (particles[i].noCollide) {
+            continue;
+        }
         inArea(particles[i], fo, function(fo) {
             if (particles[i].alive && !fo.good) {
+                fo.alive = false;
                 audio.play('explode_meteor');
                 player.score += (fo.width * fo.height) / 100;
             }

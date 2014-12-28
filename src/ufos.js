@@ -34,7 +34,7 @@ var spawn = function(n) {
         targetY = rnd() * WIDTH;
         targetX = rnd() * HEIGHT;
         obj.angle = rnd() * Math.PI * 2;
-        obj.good = obj.image.indexOf('rock') < 0 ? false : true;
+        obj.good = obj.image.indexOf('rock') >= 0 ? false : true;
         obj.width = loader.images[obj.image].width;
         obj.height = loader.images[obj.image].height;
 

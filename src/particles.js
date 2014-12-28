@@ -15,7 +15,7 @@ var Particle = function(x, y, speed, decRate) {
     this.loop = function(ctx, player) {
         if (this.delay > 0) {
             if (this.delay <= 1) {
-                this.angle = player.angle - this.range + (Math.random() * 2 * this.range);;
+                this.angle = player.angle - this.range + (Math.random() * 2 * this.range);
             }
             this.delay--;
             return false;
@@ -41,13 +41,14 @@ var Particle = function(x, y, speed, decRate) {
 // Particles are created from angle-range to angle+range
 // speed is fixed
 var angle = 0;
-var createParticles = function(x, y, playerAngle, range, speed, n) {
+var createParticles = function(x, y, setAngle, range, speed, n, noCollide) {
     // console.log('Creating', particles);
     for (var i = 0; i < n; i++) {
         if (particles[i] && !particles[i].alive || !particles[i]) {
             particles[i] = new Particle(x, y, speed);
+            particles[i].setAngle = setAngle;
             particles[i].range = range;
-            particles[i].player = true;
+            particles[i].noCollide = noCollide; // Particle won't collide with anything
         }
     }
 };
