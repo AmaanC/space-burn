@@ -1,5 +1,12 @@
 var player = require('./player');
 var keys = {};
+var C = {
+    SPACE: 32,
+    LEFT: 37,
+    UP: 38,
+    RIGHT: 39,
+    DOWN: 40
+}
 document.body.addEventListener('keydown', function(e) {
     if (e.keyCode === 32) {
         player.flip();
@@ -16,18 +23,18 @@ document.body.addEventListener('keyup', function(e) {
 
 module.exports = {
     left: function() {
-        return keys[37];
+        return keys[C.LEFT];
     },
     up: function() {
-        return keys[38];
+        return keys[C.UP];
     },
     right: function() {
-        return keys[39];
+        return keys[C.RIGHT];
     },
     down: function() {
-        return keys[40];
+        return keys[C.DOWN];
     },
     flip: function() {
-        return keys[32];
+        return keys[C.SPACE];
     }
 };
