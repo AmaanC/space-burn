@@ -1,4 +1,5 @@
 var particlesModule = require('./particles');
+var shake = require('./screenshake');
 
 var playerHitBox = {
     x: 375,
@@ -93,6 +94,7 @@ var check = function(player, foModule) {
                 player.health -= (fo.width * fo.height) / 100;
                 console.log('Collision particles');
                 explodeObj(fo);
+                shake(2);
             }
         }
     }

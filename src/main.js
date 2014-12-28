@@ -6,8 +6,8 @@ var key = require('./keys');
 var particles = require('./particles');
 var flyingObjects = require('./ufos');
 var collisions = require('./collisions');
-var menus = require('./menus.js');
-var audio = require('./audio.js');
+var menus = require('./menus');
+var audio = require('./audio');
 
 var canvas = document.querySelector('#game');
 var ctx = canvas.getContext('2d');
