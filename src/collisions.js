@@ -94,7 +94,7 @@ var check = function(player, foModule) {
                 player.health -= (fo.width * fo.height) / 100;
                 console.log('Collision particles');
                 explodeObj(fo);
-                shake(2);
+                shake(5);
             }
         }
     }
@@ -110,6 +110,7 @@ var check = function(player, foModule) {
                 audio.play('explode_meteor');
                 player.score += (fo.width * fo.height) / 100;
                 explodeObj(fo);
+                shake(2);
             }
         });
     }

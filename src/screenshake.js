@@ -10,15 +10,20 @@ var totalX = 0;
 var totalY = 0;
 
 var shake = function(intensity) {
+    if (!intensity) {
+        intensity = 2;
+    }
     var dX = Math.random() * intensity * polarity();
     var dY = Math.random() * intensity * polarity();
     totalX += dX;
     totalY += dY;
 
-    if (intensity <= 0.15) {
+    if (Math.round(intensity) % 2 === 0) {
         ctx.translate(-totalX, -totalY);
         totalX = totalY = 0;
-        return true;
+        if (intensity <= 0.15) {
+            return true;
+        }
     }
     ctx.translate(dX, dY);
     setTimeout(function() {
