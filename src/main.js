@@ -52,7 +52,7 @@ loader.done(function() {
 
             player.score += 0.1;
 
-            if (player.health <= 0 || player.fuel <= 0) {
+            if (player.health <= 0) {
                 window.state = 'end';
             }
         }
