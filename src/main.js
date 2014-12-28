@@ -4,7 +4,7 @@ var raf = require('./raf');
 var player = require('./player');
 var key = require('./keys');
 var particles = require('./particles');
-var enemies = require('./enemies');
+var flyingObjects = require('./ufos');
 var collisions = require('./collisions');
 var menus = require('./menus.js');
 var audio = require('./audio.js');
@@ -39,13 +39,14 @@ loader.done(function() {
                 player.left(elapsed);
             }
 
-            collisions.check(player, enemies);
+            // This function checks for all required collisions, and calls the corresponding functions after too
+            collisions.check(player, flyingObjects);
 
             // Clear the screen
             ctx.fillStyle = '#0f0d20';
             ctx.fillRect(0, 0, 800, 600);
 
-            enemies.loop(elapsed, ctx, player.offsetX, player.offsetY);
+            flyingObjects.loop(elapsed, ctx, player.offsetX, player.offsetY);
             particles.draw(elapsed, ctx, player);
             player.draw(elapsed, ctx);
             menus.ingame(ctx, player.fuel, player.health, player.score);
@@ -73,7 +74,7 @@ var changeState = function() {
         player.score = 0;
         player.reset();
         particles.reset();
-        enemies.reset();
+        flyingObjects.reset();
     }
 };
 

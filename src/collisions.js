@@ -6,9 +6,9 @@ var playerHitBox = {
     width: 50,
     height: 60
 };
-var angledCollision = function(player, enemy) {
+var angledCollision = function(player, fo) {
     var colliding = false;
-    colliding = aabb(playerHitBox, enemy);
+    colliding = aabb(playerHitBox, fo);
     return colliding;
 };
 
@@ -54,46 +54,47 @@ var camera = {
     height: 1200
 };
 
-var check = function(player, enemiesModule) {
+var check = function(player, foModule) {
+    // fo stands for flyingObjects
     var particles = particlesModule.array;
-    var enemies = enemiesModule.array;
-    // Manage enemy spawning
-    var enemiesInView = inArea(camera, enemies, undefined, function(enemy) {
-        enemy.alive = false;
+    var fo = foModule.array;
+    // Manage flying object spawning
+    var foInView = inArea(camera, fo, undefined, function(fo) {
+        fo.alive = false;
     });
-    if (enemiesInView.length < 30) {
-        enemiesModule.spawn(Math.random() * 100);
+    if (foInView.length < 30) {
+        foModule.spawn(Math.random() * 100);
     }
 
     // Collisions between the player and rocks
-    var enemiesToTest = inArea(playerArea, enemies);
-    for (var i = 0; i < enemiesToTest.length; i++) {
-        if (angledCollision(player, enemiesToTest[i])) {
+    var foToTest = inArea(playerArea, fo);
+    for (var i = 0; i < foToTest.length; i++) {
+        if (angledCollision(player, foToTest[i])) {
             // console.log('HIT');
-            enemiesToTest[i].alive = false;
-            if (enemiesToTest[i].type === 'power-icon.png') {
+            foToTest[i].alive = false;
+            if (foToTest[i].type === 'power-icon.png') {
                 audio.play('collect');
                 player.fuel += 10;
             }
             else {
                 audio.play('collide');
-                player.health -= (enemiesToTest[i].width * enemiesToTest[i].height) / 100;
+                player.health -= (foToTest[i].width * foToTest[i].height) / 100;
             }
         }
     }
 
-    // Check for collisions between particles and enemies
+    // Check for collisions between particles and fo
     for (var i = 0; i < particles.length; i++) {
-        inArea(particles[i], enemies, function(enemy) {
+        inArea(particles[i], fo, function(fo) {
             if (particles[i].alive) {
-                enemy.alive = false;
-                if (enemy.type === 'power-icon.png') {
+                fo.alive = false;
+                if (fo.type === 'power-icon.png') {
                     audio.play('collect');
                 }
                 else {
                     audio.play('explode_meteor');
                 }
-                player.score += (enemy.width * enemy.height) / 100;
+                player.score += (fo.width * fo.height) / 100;
             }
         });
     }

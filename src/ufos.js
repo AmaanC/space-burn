@@ -1,4 +1,10 @@
-var enemies = [];
+// ufos.js
+// This file defines behavior for all the unidentified flying objects
+// I guess they *are* identified, technically.
+// But ufos.js is cooler than ifos.js
+// Asteroids and health / fuel pickups count as UFOs
+
+var flyingObjects = [];
 
 var loader = require('./loader.js');
 
@@ -14,7 +20,7 @@ var MIN_SPEED = 0.3, MAX_SPEED = 2;
 var WIDTH = 800, HEIGHT = 600;
 
 var spawn = function(n) {
-    // console.log('Spawned enemies:', n);
+    // console.log('Spawned flyingObjects:', n);
     var obj, targetY, targetX;
     var signX, signY, posX, posY;
     for (var i = 0; i < n; i++) {
@@ -37,22 +43,22 @@ var spawn = function(n) {
         else {
             obj.y += choose(-1, 1) * (HEIGHT + obj.height);
         }
-        enemies.push(obj);
+        flyingObjects.push(obj);
     }
 };
 
 var loop = function(elapsed, ctx, offsetX, offsetY) {
-    var enemy;
-    for (var i = enemies.length - 1; i >= 0; i--) {
-        enemy = enemies[i];
-        if (enemy.alive) {
-            enemy.x += Math.cos(enemy.angle) * enemy.speed - offsetX;
-            enemy.y += Math.sin(enemy.angle) * enemy.speed - offsetY;
+    var obj;
+    for (var i = flyingObjects.length - 1; i >= 0; i--) {
+        obj = flyingObjects[i];
+        if (obj.alive) {
+            obj.x += Math.cos(obj.angle) * obj.speed - offsetX;
+            obj.y += Math.sin(obj.angle) * obj.speed - offsetY;
             ctx.fillStyle = 'red';
-            ctx.drawImage(loader.images[enemy.type], enemy.x, enemy.y);
+            ctx.drawImage(loader.images[obj.type], obj.x, obj.y);
         }
         else {
-            enemies.splice(i, 1);
+            flyingObjects.splice(i, 1);
         }
     }
 };
@@ -60,9 +66,9 @@ var loop = function(elapsed, ctx, offsetX, offsetY) {
 
 module.exports = {
     loop: loop,
-    array: enemies,
+    array: flyingObjects,
     spawn: spawn,
     reset: function() {
-        enemies.length = 0;
+        flyingObjects.length = 0;
     }
 };
