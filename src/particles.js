@@ -32,7 +32,7 @@ var Particle = function(x, y, speed, decRate) {
         ctx.save();
         ctx.globalAlpha = this.opacity;
         ctx.translate(this.x, this.y);
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = this.color || 'red';
         ctx.fillRect(0, 0, W, H);
         ctx.restore();
     };

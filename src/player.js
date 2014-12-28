@@ -15,7 +15,7 @@ var playerDefaults = {
     offsetY: 0,
     offsetX: 0,
     health: 1000000,
-    fuel: 100
+    fuel: 1000000
 };
 
 player.width = 52;

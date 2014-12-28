@@ -40,6 +40,10 @@ var spawn = function(n) {
         obj.dx = Math.cos(obj.angle) * obj.speed;
         obj.dy = Math.sin(obj.angle) * obj.speed;
 
+        if (!obj.good) {
+            obj.color = obj.image.indexOf('alt') < 0 ? '#aaaaaa' : '#a78258';
+        }
+
         if (rnd() > 0.5) {
             obj.x += choose(-1, 1) * (WIDTH + obj.width);
         }

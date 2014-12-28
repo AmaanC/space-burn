@@ -54,6 +54,16 @@ var camera = {
     height: 1200
 };
 
+var explodeObj = function(fo) {
+    particlesModule.createParticles(fo.x, fo.y, fo.speed, 0.01, 20, {
+        range: 2 * Math.PI,
+        noCollide: true,
+        dx: fo.dx,
+        dy: fo.dy,
+        color: fo.color
+    });
+};
+
 var check = function(player, foModule) {
     // fo stands for flyingObjects
     var particles = particlesModule.array;
@@ -82,12 +92,7 @@ var check = function(player, foModule) {
                 audio.play('collide');
                 player.health -= (fo.width * fo.height) / 100;
                 console.log('Collision particles');
-                particlesModule.createParticles(fo.x, fo.y, fo.speed, 0.01, 100, {
-                    range: 2 * Math.PI,
-                    noCollide: true,
-                    dx: fo.dx,
-                    dy: fo.dy
-                });
+                explodeObj(fo);
             }
         }
     }
@@ -102,6 +107,7 @@ var check = function(player, foModule) {
                 fo.alive = false;
                 audio.play('explode_meteor');
                 player.score += (fo.width * fo.height) / 100;
+                explodeObj(fo);
             }
         });
     }
