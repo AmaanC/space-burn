@@ -37,6 +37,8 @@ var spawn = function(n) {
         obj.good = obj.image.indexOf('rock') >= 0 ? false : true;
         obj.width = loader.images[obj.image].width;
         obj.height = loader.images[obj.image].height;
+        obj.dx = Math.cos(obj.angle) * obj.speed;
+        obj.dy = Math.sin(obj.angle) * obj.speed;
 
         if (rnd() > 0.5) {
             obj.x += choose(-1, 1) * (WIDTH + obj.width);
@@ -53,8 +55,8 @@ var loop = function(elapsed, ctx, offsetX, offsetY) {
     for (var i = flyingObjects.length - 1; i >= 0; i--) {
         obj = flyingObjects[i];
         if (obj.alive) {
-            obj.x += Math.cos(obj.angle) * obj.speed - offsetX;
-            obj.y += Math.sin(obj.angle) * obj.speed - offsetY;
+            obj.x += obj.dx - offsetX;
+            obj.y += obj.dy - offsetY;
             ctx.fillStyle = 'red';
             ctx.drawImage(loader.images[obj.image], obj.x, obj.y);
         }

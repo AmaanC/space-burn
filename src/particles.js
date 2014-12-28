@@ -5,6 +5,7 @@ var Particle = function(x, y, speed, decRate) {
     this.alive = true;
     this.x = x;
     this.y = y;
+    this.dx = this.dy = 0;
     this.width = W;
     this.height = H;
     this.angle = 0;
@@ -20,8 +21,8 @@ var Particle = function(x, y, speed, decRate) {
             this.delay--;
             return false;
         }
-        this.x += Math.sin(-this.angle) * speed;
-        this.y += Math.cos(-this.angle) * speed;
+        this.x += this.dx - window.player.offsetX + Math.sin(-this.angle) * speed;
+        this.y += this.dy - window.player.offsetY + Math.cos(-this.angle) * speed;
         this.opacity -= this.decRate;
         if (this.opacity <= 0) {
             this.opacity = 0;
@@ -41,15 +42,22 @@ var Particle = function(x, y, speed, decRate) {
 // Particles are created from angle-range to angle+range
 // speed is fixed
 var angle = 0;
-var createParticles = function(x, y, setAngle, range, speed, n, noCollide) {
+var createParticles = function(x, y, speed, decRate, n, props) {
     // console.log('Creating', particles);
-    for (var i = 0; i < n; i++) {
-        if (particles[i] && !particles[i].alive || !particles[i]) {
-            particles[i] = new Particle(x, y, speed);
-            particles[i].setAngle = setAngle;
-            particles[i].range = range;
-            particles[i].noCollide = noCollide; // Particle won't collide with anything
+    var created = 0, i = 0;
+    var particle;
+    while(created < n) {
+        particle = particles[i];
+        if (particle && !particle.alive || !particle) {
+            particles[i] = new Particle(x, y, speed, decRate);
+            created++;
+            var keys = Object.keys(props);
+            for (var j = 0; j < keys.length; j++) {
+                particles[i][keys[j]] = props[keys[j]];
+            }
+            // Possible props: range, noCollide, dx, dy
         }
+        i++;
     }
 };
 

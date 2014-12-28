@@ -57,9 +57,9 @@ var camera = {
 var check = function(player, foModule) {
     // fo stands for flyingObjects
     var particles = particlesModule.array;
-    var fo = foModule.array;
+    var fos = foModule.array;
     // Manage flying object spawning
-    var foInView = inArea(camera, fo, undefined, function(fo) {
+    var foInView = inArea(camera, fos, undefined, function(fo) {
         fo.alive = false;
     });
     if (foInView.length < 30) {
@@ -67,20 +67,27 @@ var check = function(player, foModule) {
     }
 
     // Collisions between the player and rocks
-    var foToTest = inArea(playerArea, fo);
+    var foToTest = inArea(playerArea, fos);
+    var fo;
     for (var i = 0; i < foToTest.length; i++) {
-        if (angledCollision(player, foToTest[i])) {
+        fo = foToTest[i];
+        if (angledCollision(player, fo)) {
             // console.log('HIT');
-            foToTest[i].alive = false;
-            if (foToTest[i].image === 'power-icon.png') {
+            fo.alive = false;
+            if (fo.image === 'power-icon.png') {
                 audio.play('collect');
                 player.fuel += 10;
             }
             else {
                 audio.play('collide');
-                player.health -= (foToTest[i].width * foToTest[i].height) / 100;
+                player.health -= (fo.width * fo.height) / 100;
                 console.log('Collision particles');
-                particlesModule.createParticles(fo.x, fo.y, 0, 2 * Math.PI, fo.speed, 100, true);
+                particlesModule.createParticles(fo.x, fo.y, fo.speed, 0.01, 100, {
+                    range: 2 * Math.PI,
+                    noCollide: true,
+                    dx: fo.dx,
+                    dy: fo.dy
+                });
             }
         }
     }
@@ -90,7 +97,7 @@ var check = function(player, foModule) {
         if (particles[i].noCollide) {
             continue;
         }
-        inArea(particles[i], fo, function(fo) {
+        inArea(particles[i], fos, function(fo) {
             if (particles[i].alive && !fo.good) {
                 fo.alive = false;
                 audio.play('explode_meteor');

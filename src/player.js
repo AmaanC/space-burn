@@ -14,7 +14,7 @@ var playerDefaults = {
     angle: 0,
     offsetY: 0,
     offsetX: 0,
-    health: 100,
+    health: 1000000,
     fuel: 100
 };
 
