@@ -72,7 +72,7 @@ var check = function(player, foModule) {
         if (angledCollision(player, foToTest[i])) {
             // console.log('HIT');
             foToTest[i].alive = false;
-            if (foToTest[i].type === 'power-icon.png') {
+            if (foToTest[i].image === 'power-icon.png') {
                 audio.play('collect');
                 player.fuel += 10;
             }
@@ -88,7 +88,7 @@ var check = function(player, foModule) {
         inArea(particles[i], fo, function(fo) {
             if (particles[i].alive) {
                 fo.alive = false;
-                if (fo.type === 'power-icon.png') {
+                if (fo.good) {
                     audio.play('collect');
                 }
                 else {

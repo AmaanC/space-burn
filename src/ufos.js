@@ -28,14 +28,15 @@ var spawn = function(n) {
             x: (rnd() * WIDTH),
             y: (rnd() * HEIGHT),
             speed: rnd() * (MAX_SPEED - MIN_SPEED) + MIN_SPEED,
-            type: choose.apply(this, loader.get('rock').concat(loader.get('power-icon'))),
+            image: choose.apply(this, loader.get('rock').concat(loader.get('power-icon'))),
             alive: true
         };
         targetY = rnd() * WIDTH;
         targetX = rnd() * HEIGHT;
         obj.angle = rnd() * Math.PI * 2;
-        obj.width = loader.images[obj.type].width;
-        obj.height = loader.images[obj.type].height;
+        obj.good = obj.image.indexOf('rock') < 0 ? false : true;
+        obj.width = loader.images[obj.image].width;
+        obj.height = loader.images[obj.image].height;
 
         if (rnd() > 0.5) {
             obj.x += choose(-1, 1) * (WIDTH + obj.width);
@@ -55,7 +56,7 @@ var loop = function(elapsed, ctx, offsetX, offsetY) {
             obj.x += Math.cos(obj.angle) * obj.speed - offsetX;
             obj.y += Math.sin(obj.angle) * obj.speed - offsetY;
             ctx.fillStyle = 'red';
-            ctx.drawImage(loader.images[obj.type], obj.x, obj.y);
+            ctx.drawImage(loader.images[obj.image], obj.x, obj.y);
         }
         else {
             flyingObjects.splice(i, 1);
