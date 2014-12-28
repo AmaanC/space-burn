@@ -86,14 +86,8 @@ var check = function(player, foModule) {
     // Check for collisions between particles and fo
     for (var i = 0; i < particles.length; i++) {
         inArea(particles[i], fo, function(fo) {
-            if (particles[i].alive) {
-                fo.alive = false;
-                if (fo.good) {
-                    audio.play('collect');
-                }
-                else {
-                    audio.play('explode_meteor');
-                }
+            if (particles[i].alive && !fo.good) {
+                audio.play('explode_meteor');
                 player.score += (fo.width * fo.height) / 100;
             }
         });
