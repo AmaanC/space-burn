@@ -57,7 +57,7 @@ var camera = {
 
 var explodeObj = function(fo) {
     particlesModule.createParticles(fo.x, fo.y, fo.speed, 0.01, fo.width * fo.height / 100, {
-        range: 2 * Math.PI,
+        range: Math.random() * 2 * Math.PI,
         noCollide: true,
         dx: fo.dx,
         dy: fo.dy,
