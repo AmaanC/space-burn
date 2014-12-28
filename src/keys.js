@@ -8,7 +8,7 @@ var C = {
     DOWN: 40
 }
 document.body.addEventListener('keydown', function(e) {
-    if (e.keyCode === 32) {
+    if (e.keyCode === C.SPACE) {
         player.flip();
         e.preventDefault();
     }
