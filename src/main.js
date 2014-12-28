@@ -23,7 +23,7 @@ loader.done(function() {
         }
         else if (window.state === 'game') {
             player.gravity(elapsed);
-            if (key.up()) {
+            if (key.up() && player.fuel > 0) {
                 audio.play('jetpack');
                 player.up(elapsed);
                 particles.createParticles(player.x + player.width / 2, player.y + player.height / 2, player.angle, Math.PI / 10, 10, 10);
