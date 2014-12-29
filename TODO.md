@@ -13,5 +13,6 @@ I'm going to try to maintain this as a document listing things I need to remembe
 Player would get a bonus for doing all available objectives (most likely 3 at a time) in one go
 
 ###Other
-- Screenshake
+- Screenshake (done)
 - White flashes on jetpack and on explosions
+- Remember to use loader.images instead of creating new images

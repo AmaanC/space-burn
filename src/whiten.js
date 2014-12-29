@@ -9,7 +9,6 @@ var whiten = function(imgName) {
     var canvas = document.createElement('canvas');
     var ctx = canvas.getContext('2d');
     var img = images[imgName];
-    console.log(images, imgName);
 
     canvas.width = img.width;
     canvas.height = img.height;
