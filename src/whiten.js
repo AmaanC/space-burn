@@ -2,7 +2,7 @@ var loader = require('./loader');
 var images = loader.images;
 
 var cache = {};
-var whiten = function(imgName) {
+var whiten = function(imgName, color) {
     if (cache[imgName]) {
         return cache[imgName];
     }
@@ -14,7 +14,7 @@ var whiten = function(imgName) {
     canvas.height = img.height;
     ctx.drawImage(img, 0, 0, img.width, img.height);
     ctx.globalCompositeOperation = 'source-atop';
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = color || 'white';
     ctx.fillRect(0, 0, img.width, img.height);
     cache[imgName] = canvas;
     return canvas;

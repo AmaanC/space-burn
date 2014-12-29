@@ -105,7 +105,7 @@ player.draw = function(elapsed, ctx) {
     // player.hit is set in collisions.js
     // If the player's been hit, we want it to flash white to indicate that
     if (player.hit) {
-        ctx.drawImage(whiten(player[player.state].name), -hW, -hH);
+        ctx.drawImage(whiten(player[player.state].name, 'pink'), -hW, -hH);
         ticks++;
         if (ticks >= 4) {
             player.hit = false;
