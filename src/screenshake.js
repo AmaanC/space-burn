@@ -18,7 +18,8 @@ var shake = function(intensity) {
     totalX += dX;
     totalY += dY;
 
-    if (Math.round(intensity) % 2 === 0) {
+    // Bring the screen back to its usual position every "2 intensity" so as not to get too far away from the center
+    if (intensity % 2 < 0.2) {
         ctx.translate(-totalX, -totalY);
         totalX = totalY = 0;
         if (intensity <= 0.15) {
