@@ -91,6 +91,7 @@ var check = function(player, foModule) {
             }
             else {
                 audio.play('collide');
+                player.hit = true;
                 player.health -= (fo.width * fo.height) / 100;
                 console.log('Collision particles');
                 explodeObj(fo);

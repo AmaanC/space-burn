@@ -1,12 +1,14 @@
-// var Transform = require('./transform.js');
+var whiten = require('./whiten');
 var canvas = document.querySelector('#game');
 
 window.player = {};
 
 player.idle = new Image();
 player.idle.src = 'images/astro.png';
+player.idle.name = 'astro.png';
 player.flying = new Image();
 player.flying.src = 'images/astro-flying.png';
+player.flying.name = 'astro-flying.png';
 player.state = 'idle';
 
 var playerDefaults = {
@@ -93,23 +95,27 @@ player.flip = function() {
     player.angle += Math.PI;
 };
 
-// var t = new Transform();
+
+var ticks = 0;
 player.draw = function(elapsed, ctx) {
-    // ctx.fillRect(375, 270, 50, 60);
     // Player
     ctx.save();
     ctx.translate(player.x + hW, player.y + hH);
-    // t.translate(player.x + hW, player.y + hH);
     ctx.rotate(player.angle);
-    // t.rotate(player.angle);
-    ctx.drawImage(player[player.state], -hW, -hH);
+    // player.hit is set in collisions.js
+    // If the player's been hit, we want it to flash white to indicate that
+    if (player.hit) {
+        ctx.drawImage(whiten(player[player.state].name), -hW, -hH);
+        ticks++;
+        if (ticks >= 4) {
+            player.hit = false;
+            ticks = 0;
+        }
+    }
+    else {
+        ctx.drawImage(player[player.state], -hW, -hH);
+    }
     ctx.restore();
-
-    // player.topLeft = t.transformPoint(-hW, -hH);
-    // player.topRight = t.transformPoint(hW, -hH);
-    // player.bottomLeft = t.transformPoint(-hW, hH);
-    // player.bottomRight = t.transformPoint(hW, hH);
-    // t.reset();
 
 };
 
