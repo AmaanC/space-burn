@@ -22,11 +22,11 @@ module.exports = {
         ctx.fillRect(0, 0, 800, 600);
         text.write('The end! You scored ' + Math.round(score) + ' points!', 'center', 300, function() {
             ctx.fillStyle = 'white';
-            ctx.font = '32pt Arial';
+            ctx.font = '26pt Tempesta Five';
         });
         text.write('Click to play again', 'center', 500, function() {
             ctx.fillStyle = 'white';
-            ctx.font = '22pt Arial';
+            ctx.font = '22pt Tempesta Five';
         });
     },
     ingame: function (ctx, fuel, health, score) {
@@ -39,8 +39,9 @@ module.exports = {
         ctx.fillStyle = 'red';
         ctx.fillRect(70, 490 - health, 20, health);
 
-        ctx.font = '12pt Arial';
-        ctx.fillStyle = 'white';
-        ctx.fillText('Score: ' + Math.round(score), 27, 550);
+        text.write('Score: ' + Math.round(score), 20, 550, function() {
+            ctx.font = '12pt Tempesta Five';
+            ctx.fillStyle = 'white';
+        });
     }
 };
