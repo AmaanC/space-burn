@@ -10,6 +10,9 @@ var totalX = 0;
 var totalY = 0;
 
 var shake = function(intensity) {
+    if (totalX === 0) {
+        ctx.save();
+    }
     if (!intensity) {
         intensity = 2;
     }
@@ -23,6 +26,7 @@ var shake = function(intensity) {
         ctx.translate(-totalX, -totalY);
         totalX = totalY = 0;
         if (intensity <= 0.15) {
+            ctx.restore(); // Just to make sure it goes back to normal
             return true;
         }
     }
