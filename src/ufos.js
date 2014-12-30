@@ -41,7 +41,7 @@ var spawn = function(n) {
         obj.dy = Math.sin(obj.angle) * obj.speed;
 
         if (!obj.good) {
-            obj.color = obj.image.indexOf('alt') < 0 ? '#aaaaaa' : '#a78258';
+            obj.color = obj.image.indexOf('alt') < 0 ? '#524C4C' : '#a78258';
         }
 
         if (rnd() > 0.5) {

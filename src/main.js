@@ -26,7 +26,7 @@ loader.done(function() {
             if (key.up() && player.fuel > 0) {
                 audio.play('jetpack');
                 player.up(elapsed);
-                particles.createParticles(player.x + player.width / 2, player.y + player.height / 2, 10, 0.1, 10, {
+                particles.createParticles(player.x + player.width / 2, player.y + player.height / 2, 10, 0.1, 10, ['blue', 'red'], {
                     range: Math.PI / 10
                 });
             } else {
