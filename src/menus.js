@@ -7,8 +7,15 @@ module.exports = {
         ctx.fillRect(0, 0, 800, 600);
 
         ctx.drawImage(loader.images['logo.png'], 314, 180);
-        ctx.drawImage(loader.images['text-play.png'], 333, 300);
-        ctx.drawImage(loader.images['text-credits.png'], 287, 500);
+
+        // ctx.drawImage(loader.images['text-credits.png'], 287, 500);
+        text.write('CLICK TO PLAY', 'center', 330);
+        text.write('A GAME BY', 'center', 500);
+        text.write('@AMAANC AND @MIKEDIDTHIS', 'center', 520, function(ctx) {
+            ctx.fillStyle = '#DCFCF9';
+            ctx.font = '12pt Tempesta Five';
+        });
+
     },
     drawEnd: function(ctx, score) {
         ctx.fillStyle = '#0f0d20';

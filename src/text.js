@@ -1,9 +1,14 @@
 var canvas = document.getElementsByTagName('canvas')[0];
 var ctx = canvas.getContext('2d');
 module.exports.write = function (text, x, y, preFunc, stroke){
+    ctx.save();
+    
     if(preFunc){
-        ctx.save();
         preFunc(ctx);
+    }
+    else {
+        ctx.fillStyle = 'white';
+        ctx.font = '12pt Tempesta Five';
     }
 
     var xPos = x;
@@ -18,7 +23,5 @@ module.exports.write = function (text, x, y, preFunc, stroke){
         ctx.fillText(text, xPos, y);
     }
 
-    if(preFunc){
-        ctx.restore();
-    }
+    ctx.restore();
 };

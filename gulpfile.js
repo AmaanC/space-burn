@@ -67,8 +67,7 @@ gulp.task('build_index', function() {
 });
 
 gulp.task('build_styles', function() {
-  return gulp.src('src/styles.less')
-    .pipe(less())
+  return gulp.src('src/*.css')
     .pipe(concat('build.css'))
     .pipe(gulpif(prod, cssmin()))
     .pipe(gulp.dest('build'));
@@ -100,7 +99,7 @@ gulp.task('dist', ['build'], function() {
 
 gulp.task('watch', function() {
   gulp.watch('src/**/*.js', [/*'lint', */'build_source']);
-  gulp.watch('src/styles.less', ['build_styles']);
+  gulp.watch('src/*.css', ['build_styles']);
   gulp.watch('src/index.html', ['build_index']);
 });
 
