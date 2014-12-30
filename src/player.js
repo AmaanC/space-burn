@@ -107,7 +107,7 @@ player.draw = function(elapsed, ctx) {
     if (player.hit) {
         ctx.drawImage(whiten(player[player.state].name, 'pink'), -hW, -hH);
         ticks++;
-        if (ticks >= 4) {
+        if (ticks >= 8) {
             player.hit = false;
             ticks = 0;
         }
