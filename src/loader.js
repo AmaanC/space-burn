@@ -8,9 +8,7 @@ var imageNames = [
     'rock-5.png',
     'rock-alt-5.png',
     'rock-odd-1.png',
-    'rock-odd-3.png',
-    'text-credits.png',
-    'text-play.png'
+    'rock-odd-3.png'
 ];
 
 var images = {};
