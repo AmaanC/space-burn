@@ -1,3 +1,4 @@
+// This file exports a function that lets you make images "flash" momentarily. Like the player when he gets hit by an asteroid
 var loader = require('./loader');
 var images = loader.images;
 

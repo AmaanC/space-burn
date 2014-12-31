@@ -7,8 +7,6 @@ module.exports = {
         ctx.fillRect(0, 0, 800, 600);
 
         ctx.drawImage(loader.images['logo.png'], 314, 180);
-
-        // ctx.drawImage(loader.images['text-credits.png'], 287, 500);
         text.write('CLICK TO PLAY', 'center', 330);
         text.write('A GAME BY', 'center', 500);
         text.write('@AMAANC AND @MIKEDIDTHIS', 'center', 520, function(ctx) {
@@ -33,7 +31,6 @@ module.exports = {
         ctx.drawImage(loader.images['power-bar-icon.png'], 30, 500);
         ctx.fillStyle = 'orange';
         ctx.fillRect(30, 490 - fuel, 20, fuel);
-
 
         ctx.drawImage(loader.images['health-bar-icon.png'], 70, 500);
         ctx.fillStyle = 'red';
