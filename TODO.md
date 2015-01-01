@@ -14,5 +14,6 @@ Player would get a bonus for doing all available objectives (most likely 3 at a 
 
 ###Other
 - Screenshake (done)
-- White flashes on jetpack and on explosions
+- White flashes on jetpack and on explosions (done)
 - Remember to use loader.images instead of creating new images
+- Secret achievement (certain locations)
