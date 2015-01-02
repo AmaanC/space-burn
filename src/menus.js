@@ -1,5 +1,21 @@
-var loader = require('./loader.js');
-var text = require('./text.js');
+var loader = require('./loader');
+var text = require('./text');
+var buttons = require('./buttons');
+
+buttons.addButton(
+    {
+        x: 'center',
+        y: 300,
+        width: 200,
+        height: 50
+    },
+    'menu',
+    function() {
+        window.state = 'game';
+    },
+    'Click to play',
+    '12pt Tempesta Five'
+);
 
 module.exports = {
     drawMenu: function(ctx) {
@@ -7,7 +23,7 @@ module.exports = {
         ctx.fillRect(0, 0, 800, 600);
 
         ctx.drawImage(loader.images['logo.png'], 314, 180);
-        text.write('CLICK TO PLAY', 'center', 330);
+        // text.write('CLICK TO PLAY', 'center', 330);
         text.write('A GAME BY', 'center', 500);
         text.write('@AMAANC AND @MIKEDIDTHIS', 'center', 520, function(ctx) {
             ctx.fillStyle = '#DCFCF9';

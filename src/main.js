@@ -7,6 +7,7 @@ var particles = require('./particles');
 var flyingObjects = require('./ufos');
 var collisions = require('./collisions');
 var menus = require('./menus');
+var buttons = require('./buttons');
 var audio = require('./audio');
 
 var canvas = document.querySelector('#game');
@@ -63,26 +64,26 @@ loader.done(function() {
             audio.pause(sfx);
             menus.drawEnd(ctx, player.score);
         }
-
+        buttons.drawAll();
     });
 });
 
-var changeState = function() {
-    if (window.state === 'menu') {
-        window.state = 'game';
-    }
-    else if (window.state === 'end') {
-        window.state = 'game';
-        player.score = 0;
-        player.reset();
-        particles.reset();
-        flyingObjects.reset();
-    }
-};
+// var changeState = function() {
+//     if (window.state === 'menu') {
+//         window.state = 'game';
+//     }
+//     else if (window.state === 'end') {
+//         window.state = 'game';
+//         player.score = 0;
+//         player.reset();
+//         particles.reset();
+//         flyingObjects.reset();
+//     }
+// };
 
-canvas.addEventListener('click', changeState, false);
-document.body.addEventListener('keydown', function(e) {
-    if (e.keyCode === 13) {
-        changeState();
-    }
-}, false);
+// canvas.addEventListener('click', changeState, false);
+// document.body.addEventListener('keydown', function(e) {
+//     if (e.keyCode === 13) {
+//         changeState();
+//     }
+// }, false);
