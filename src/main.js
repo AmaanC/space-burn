@@ -49,8 +49,8 @@ loader.done(function() {
             ctx.fillStyle = '#0f0d20';
             ctx.fillRect(0, 0, 800, 600);
 
-            flyingObjects.loop(elapsed, ctx, player.offsetX, player.offsetY);
             particles.draw(elapsed, ctx, player);
+            flyingObjects.loop(elapsed, ctx, player.offsetX, player.offsetY);
             player.draw(elapsed, ctx);
             menus.ingame(ctx, player.fuel, player.health, player.score);
 
@@ -68,22 +68,22 @@ loader.done(function() {
     });
 });
 
-// var changeState = function() {
-//     if (window.state === 'menu') {
-//         window.state = 'game';
-//     }
-//     else if (window.state === 'end') {
-//         window.state = 'game';
-//         player.score = 0;
-//         player.reset();
-//         particles.reset();
-//         flyingObjects.reset();
-//     }
-// };
+var changeState = function() {
+    if (window.state === 'menu') {
+        window.state = 'game';
+    }
+    else if (window.state === 'end') {
+        window.state = 'game';
+        player.score = 0;
+        player.reset();
+        particles.reset();
+        flyingObjects.reset();
+    }
+};
 
 // canvas.addEventListener('click', changeState, false);
-// document.body.addEventListener('keydown', function(e) {
-//     if (e.keyCode === 13) {
-//         changeState();
-//     }
-// }, false);
+document.body.addEventListener('keydown', function(e) {
+    if (e.keyCode === 13) {
+        changeState();
+    }
+}, false);

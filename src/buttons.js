@@ -63,7 +63,6 @@ module.exports = {
 var checkClick = function(e) {
     var x = e.pageX - canvas.offsetLeft;
     var y = e.pageY - canvas.offsetTop;
-    console.log(x);
     var button;
     for (var i = 0; i < buttons.length; i++) {
         button = buttons[i];
