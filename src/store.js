@@ -13,21 +13,77 @@ var items = [
         name: 'Fuel',
         desc: 'Increases fuel by 10',
         fn: function() {
-            player.defaults.health += 10;
+            player.defaults.fuel += 10;
         }
     },
     {
-        name: 'Health',
-        desc: 'Increases health by 10',
+        name: 'Rainbow',
+        desc: '',
         fn: function() {
-            player.defaults.health = 1000;
+
         }
     },
     {
-        name: 'Health',
-        desc: 'Increases health by 10',
+        name: 'Gold Suit',
+        desc: '',
         fn: function() {
-            player.defaults.health = 1000;
+
+        }
+    },
+    {
+        name: 'Efficiency',
+        desc: 'Increases efficiency of mining rocks so you get more Altarian Dollars per asteroid',
+        fn: function() {
+
+        }
+    },
+    {
+        name: 'Indicators',
+        desc: 'Find shit more easily. Indicators around the screen will show you where objects like XYZ are',
+        fn: function() {
+
+        }
+    },
+    {
+        name: 'Range',
+        desc: 'The propulsion particles go further away, making it easier to destroy rocks',
+        fn: function() {
+
+        }
+    },
+    {
+        name: 'Auto-shield',
+        desc: 'A shield protects you from one hit in every game automatically',
+        fn: function() {
+
+        }
+    },
+    {
+        name: 'Invincibility',
+        desc: 'Press spacebar to become invincible to all asteroids, so you can be as careless as you want for 30 seconds',
+        fn: function() {
+
+        }
+    },
+    {
+        name: 'Panic explode',
+        desc: 'Press spacebar to make all asteroids on screen explode',
+        fn: function() {
+
+        }
+    },
+    {
+        name: 'Poison',
+        desc: 'Is death ever better than hardship? Yes, when you get an achievement for it. Press spacebar to die within 30 seconds.',
+        fn: function() {
+
+        }
+    },
+    {
+        name: '',
+        desc: '',
+        fn: function() {
+
         }
     }
 ];
@@ -38,10 +94,10 @@ var addItemButtons = function() {
         item = items[i];
         buttons.addButton(
             {
-                x: 100 + (i % 3) * 130,
-                y: 100 + Math.floor(i / 3) * 70,
+                x: 100 + (i % 4) * 120,
+                y: 100 + Math.floor(i / 4) * 120,
                 width: 100,
-                height: 50
+                height: 100
             },
             'store',
             item.fn,
@@ -53,7 +109,7 @@ var addItemButtons = function() {
     buttons.addButton(
         {
             x: 'center',
-            y: 450,
+            y: 470,
             width: 200,
             height: 50
         },

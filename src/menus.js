@@ -91,7 +91,7 @@ module.exports = {
         ctx.fillStyle = '#0f0d20';
         ctx.fillRect(0, 0, 800, 600);
         text.write('STORE', 30, 50, function() {
-            ctx.font = '12pt Tempesta Five';
+            ctx.font = '16pt Tempesta Five';
             ctx.fillStyle = 'white';
         });
     }
