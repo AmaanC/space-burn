@@ -27,7 +27,7 @@ loader.done(function() {
             if (key.up() && player.fuel > 0) {
                 audio.play('jetpack');
                 player.up(elapsed);
-                particles.createParticles(player.x + player.width / 2, player.y + player.height / 2, 10, 0.1, 10, ['blue', 'red'], {
+                particles.createParticles(player.x + player.width / 2, player.y + player.height / 2, 10, player.propRange, 10, ['blue', 'red'], {
                     range: Math.PI / 10
                 });
             } else {
@@ -68,16 +68,20 @@ loader.done(function() {
     });
 });
 
+window.resetGame = function() {
+    window.state = 'game';
+    player.score = 0;
+    player.reset();
+    particles.reset();
+    flyingObjects.reset();
+};
+
 var changeState = function() {
     if (window.state === 'menu') {
         window.state = 'game';
     }
     else if (window.state === 'end') {
-        window.state = 'game';
-        player.score = 0;
-        player.reset();
-        particles.reset();
-        flyingObjects.reset();
+        window.resetGame();
     }
 };
 

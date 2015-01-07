@@ -18,7 +18,8 @@ var playerDefaults = {
     offsetX: 0,
     health: 100,
     fuel: 100,
-    hit: false
+    hit: false,
+    propRange: 0.12
 };
 
 player.width = 52;
