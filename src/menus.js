@@ -68,10 +68,6 @@ module.exports = {
             ctx.fillStyle = 'white';
             ctx.font = '26pt Tempesta Five';
         });
-        text.write('Click to play again', 'center', 500, function() {
-            ctx.fillStyle = 'white';
-            ctx.font = '22pt Tempesta Five';
-        });
     },
     ingame: function(ctx, fuel, health, score) {
         ctx.drawImage(loader.images['power-bar-icon.png'], 30, 500);

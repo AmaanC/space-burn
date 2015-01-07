@@ -67,7 +67,8 @@ var checkClick = function(e) {
     for (var i = 0; i < buttons.length; i++) {
         button = buttons[i];
         if (x >= button.x && x <= button.x + button.width &&
-            y >= button.y && y <= button.y + button.height) {
+            y >= button.y && y <= button.y + button.height &&
+            window.state === button.screenState) {
             button.onclick();
             return true;
         }
