@@ -9,6 +9,7 @@ var collisions = require('./collisions');
 var menus = require('./menus');
 var buttons = require('./buttons');
 var audio = require('./audio');
+var store = require('./store');
 
 var canvas = document.querySelector('#game');
 var ctx = canvas.getContext('2d');
@@ -63,6 +64,9 @@ loader.done(function() {
         else if (window.state === 'end') {
             audio.pause(sfx);
             menus.drawEnd(ctx, player.score);
+        }
+        else if(window.state === 'store') {
+            menus.drawStore(ctx);
         }
         buttons.drawAll();
     });

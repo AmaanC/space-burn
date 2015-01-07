@@ -11,7 +11,7 @@ player.flying.src = 'images/astro-flying.png';
 player.flying.name = 'astro-flying.png';
 player.state = 'idle';
 
-var playerDefaults = {
+player.defaults = {
     score: 0,
     angle: 0,
     offsetY: 0,
@@ -50,9 +50,9 @@ var grav = 0.03;
 
 player.reset = function() {
     dX = dY = speed = dSpeed = 0;
-    var keys = Object.keys(playerDefaults);
+    var keys = Object.keys(player.defaults);
     for (var i = 0; i < keys.length; i++) {
-        player[keys[i]] = playerDefaults[keys[i]];
+        player[keys[i]] = player.defaults[keys[i]];
     }
     player.move();
 };

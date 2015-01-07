@@ -41,7 +41,7 @@ buttons.addButton(
     },
     'end',
     function() {
-        window.resetGame();
+        window.state = 'store';
     },
     'Store',
     '12pt Tempesta Five'
@@ -83,6 +83,14 @@ module.exports = {
         ctx.fillRect(70, 490 - health, 20, health);
 
         text.write('A$: ' + Math.round(score), 30, 550, function() {
+            ctx.font = '12pt Tempesta Five';
+            ctx.fillStyle = 'white';
+        });
+    },
+    drawStore: function(ctx) {
+        ctx.fillStyle = '#0f0d20';
+        ctx.fillRect(0, 0, 800, 600);
+        text.write('STORE', 30, 50, function() {
             ctx.font = '12pt Tempesta Five';
             ctx.fillStyle = 'white';
         });
