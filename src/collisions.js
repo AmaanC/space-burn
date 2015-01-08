@@ -106,6 +106,9 @@ var check = function(player, foModule) {
                     player.hit = true;
                     player.health -= (fo.width * fo.height) / 100;
                 }
+                else {
+                    player.addMoney(fo);
+                }
                 explodeObj(fo);
                 shake(5);
             }
@@ -129,7 +132,7 @@ var check = function(player, foModule) {
             if (particles[i].alive && !fo.good) {
                 fo.alive = false;
                 audio.play('explode_meteor');
-                player.money += player.moneyMultiplier * (fo.width * fo.height) / 1000;
+                player.addMoney(fo);
                 explodeObj(fo);
                 shake(2);
             }
@@ -146,7 +149,7 @@ var check = function(player, foModule) {
             fo = fos[i];
             if (fo.image !== 'power-icon.png') {
                 fo.alive = false;
-                player.money += player.moneyMultiplier * (fo.width * fo.height) / 1000;
+                player.addMoney(fo);
                 explodeObj(fo);
             }
         }

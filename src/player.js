@@ -29,7 +29,6 @@ player.x = (canvas.width - player.width) / 2;
 player.y = (canvas.height - player.height) / 2;
 player.angle = 0;
 player.totalMoney = player.money = 0;
-player.defaults.equipped = 'poison';
 
 player.offsetX = player.offsetY = 0;
 
@@ -77,8 +76,7 @@ player.up = function(elapsed) {
     player.state = 'flying';
     speed += acc;
     dSpeed = elapsed * speed;
-    // console.log(player.x, player.y);
-    // console.log(Math.sin(player.angle) * dSpeed, Math.cos(player.angle) * dSpeed);
+
     dX += Math.sin(player.angle) * dSpeed;
     dY += Math.cos(player.angle) * dSpeed;
     player.move(elapsed, true);
@@ -101,6 +99,10 @@ player.trigger = function() {
     player.triggered = player.equipped;
 };
 
+player.addMoney = function(fo) {
+    player.money += player.moneyMultiplier * (fo.width * fo.height) / 1000;
+};
+
 
 var ticks = 0;
 player.draw = function(ctx) {
@@ -110,16 +112,16 @@ player.draw = function(ctx) {
     ctx.rotate(player.angle);
     // player.hit is set in collisions.js
     // If the player's been hit, we want it to flash white to indicate that
-    if (player.hit) {
+    if (player.triggered === 'invincibility') {
+        ctx.drawImage(whiten(player[player.state].name, 'green'), -hW, -hH);
+    }
+    else if (player.hit) {
         ctx.drawImage(whiten(player[player.state].name, 'pink'), -hW, -hH);
         ticks++;
         if (ticks >= 8) {
             player.hit = false;
             ticks = 0;
         }
-    }
-    else if (player.triggered === 'invincibility') {
-        ctx.drawImage(whiten(player[player.state].name, 'green'), -hW, -hH);
     }
     else {
         ctx.drawImage(player[player.state], -hW, -hH);
