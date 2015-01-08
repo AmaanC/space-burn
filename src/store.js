@@ -62,21 +62,21 @@ var items = [
         name: 'Invincibility',
         desc: 'Press spacebar to become invincible to all asteroids, so you can be as careless as you want for 30 seconds',
         fn: function() {
-            player.equipped = 'invincibility';
+            player.defaults.equipped = 'invincibility';
         }
     },
     {
         name: 'Panic explode',
         desc: 'Press spacebar to make all asteroids on screen explode',
         fn: function() {
-            player.equipped = 'explode';
+            player.defaults.equipped = 'explode';
         }
     },
     {
         name: 'Poison',
         desc: 'Is death ever better than hardship? Yes, when you get an achievement for it. Press spacebar to die within 30 seconds.',
         fn: function() {
-            player.equipped = 'poison';
+            player.defaults.equipped = 'poison';
         }
     },
     {

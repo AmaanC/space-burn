@@ -29,7 +29,7 @@ player.x = (canvas.width - player.width) / 2;
 player.y = (canvas.height - player.height) / 2;
 player.angle = 0;
 player.totalMoney = player.money = 0;
-player.equipped = 'invincibility';
+player.defaults.equipped = 'poison';
 
 player.offsetX = player.offsetY = 0;
 
@@ -117,6 +117,9 @@ player.draw = function(ctx) {
             player.hit = false;
             ticks = 0;
         }
+    }
+    else if (player.triggered === 'invincibility') {
+        ctx.drawImage(whiten(player[player.state].name, 'green'), -hW, -hH);
     }
     else {
         ctx.drawImage(player[player.state], -hW, -hH);

@@ -56,8 +56,12 @@ loader.done(function() {
             menus.ingame(ctx, player.fuel, player.health, player.money);
 
             player.money += 0.01;
+            if (player.triggered === 'poison') {
+                player.health -= 0.1;
+            }
 
             if (player.health <= 0) {
+                player.triggered = null;
                 player.totalMoney += Math.round(player.money);
                 window.state = 'end';
             }

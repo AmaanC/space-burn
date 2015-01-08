@@ -91,24 +91,32 @@ var check = function(player, foModule) {
     // Collisions between the player and rocks
     var foToTest = inArea(playerArea, fos);
     var fo;
-    if (!player.invincible) {
-        for (var i = 0; i < foToTest.length; i++) {
-            fo = foToTest[i];
-            if (angledCollision(player, fo)) {
-                // console.log('HIT');
-                fo.alive = false;
-                if (fo.image === 'power-icon.png') {
-                    audio.play('collect');
-                    player.fuel += 10;
-                }
-                else {
-                    audio.play('collide');
+    for (var i = 0; i < foToTest.length; i++) {
+        fo = foToTest[i];
+        if (angledCollision(player, fo)) {
+            // console.log('HIT');
+            fo.alive = false;
+            if (fo.image === 'power-icon.png') {
+                audio.play('collect');
+                player.fuel += 10;
+            }
+            else {
+                audio.play('collide');
+                if (player.triggered !== 'invincibility') {
                     player.hit = true;
                     player.health -= (fo.width * fo.height) / 100;
-                    explodeObj(fo);
-                    shake(5);
                 }
+                explodeObj(fo);
+                shake(5);
             }
+        }
+    }
+    if (player.triggered === 'invincibility') {
+        ticks++;
+        if (ticks >= 600) {
+            ticks = 0;
+            player.triggered = null;
+            player.equipped = null;
         }
     }
 
@@ -130,6 +138,7 @@ var check = function(player, foModule) {
 
     if (player.triggered === 'explode') {
         player.triggered = null;
+        player.equipped = null;
         justExploded = true;
 
         shake(10);
