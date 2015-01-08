@@ -17,10 +17,10 @@ var items = [
         }
     },
     {
-        name: 'Rainbow',
+        name: 'Colorful',
         desc: '',
         fn: function() {
-
+            player.colors = ['blue', 'red'];
         }
     },
     {

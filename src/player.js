@@ -29,6 +29,7 @@ player.x = (canvas.width - player.width) / 2;
 player.y = (canvas.height - player.height) / 2;
 player.angle = 0;
 player.totalMoney = player.money = 0;
+player.colors = ['black', 'orange'];
 
 player.offsetX = player.offsetY = 0;
 
