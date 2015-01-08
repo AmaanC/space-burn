@@ -52,7 +52,7 @@ loader.done(function() {
 
             particles.draw(elapsed, ctx, player);
             flyingObjects.loop(elapsed, ctx, player.offsetX, player.offsetY);
-            player.draw(elapsed, ctx);
+            player.draw(ctx);
             menus.ingame(ctx, player.fuel, player.health, player.money);
 
             player.money += 0.01;

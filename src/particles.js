@@ -16,7 +16,7 @@ var Particle = function(x, y, speed, decRate, colors) {
     if (colors) {
         this.color = colors[Math.floor(Math.random() * colors.length)];
     }
-    this.loop = function(ctx, player) {
+    this.loop = function(elapsed, ctx, player) {
         if (this.delay > 0) {
             if (this.delay <= 1) {
                 this.angle = player.angle - this.range + (Math.random() * 2 * this.range);
@@ -24,8 +24,8 @@ var Particle = function(x, y, speed, decRate, colors) {
             this.delay--;
             return false;
         }
-        this.x += this.dx - window.player.offsetX + Math.sin(-this.angle) * speed;
-        this.y += this.dy - window.player.offsetY + Math.cos(-this.angle) * speed;
+        this.x += 66.6 * elapsed * (this.dx - window.player.offsetX + Math.sin(-this.angle) * speed);
+        this.y += 66.6 * elapsed * (this.dy - window.player.offsetY + Math.cos(-this.angle) * speed);
         this.opacity -= this.decRate;
         if (this.opacity <= 0) {
             this.opacity = 0;
@@ -67,7 +67,7 @@ var createParticles = function(x, y, speed, decRate, n, colors, props) {
 
 var draw = function(elapsed, ctx, player) {
     for (var i = 0; i < particles.length; i++) {
-        particles[i].loop(ctx, player);
+        particles[i].loop(elapsed, ctx, player);
     }
 };
 

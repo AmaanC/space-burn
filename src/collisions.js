@@ -56,6 +56,9 @@ var camera = {
 };
 
 var explodeObj = function(fo) {
+    if (fo.image === 'power-icon.png') {
+        return false;
+    }
     particlesModule.createParticles(fo.x, fo.y, fo.speed, 0.01, fo.width * fo.height / 100, [fo.color], {
         range: Math.random() * 2 * Math.PI,
         noCollide: true,
@@ -134,6 +137,7 @@ var check = function(player, foModule) {
             fo = fos[i];
             if (fo.image !== 'power-icon.png') {
                 fo.alive = false;
+                player.money += player.moneyMultiplier * (fo.width * fo.height) / 1000;
                 explodeObj(fo);
             }
         }

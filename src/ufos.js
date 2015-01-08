@@ -59,8 +59,8 @@ var loop = function(elapsed, ctx, offsetX, offsetY) {
     for (var i = flyingObjects.length - 1; i >= 0; i--) {
         obj = flyingObjects[i];
         if (obj.alive) {
-            obj.x += obj.dx - offsetX;
-            obj.y += obj.dy - offsetY;
+            obj.x += 66.6 * elapsed * (obj.dx - offsetX);
+            obj.y += 66.6 * elapsed * (obj.dy - offsetY);
             ctx.fillStyle = 'red';
             ctx.drawImage(loader.images[obj.image], obj.x, obj.y);
         }

@@ -96,9 +96,6 @@ player.right = function(elapsed) {
 player.left = function(elapsed) {
     player.angle -= elapsed * turnSpeed * Math.PI;
 };
-player.flip = function() {
-    player.angle += Math.PI;
-};
 player.equip = function() {
     // Enable the equippable item
     player.equipped = 'explode';
@@ -106,7 +103,7 @@ player.equip = function() {
 
 
 var ticks = 0;
-player.draw = function(elapsed, ctx) {
+player.draw = function(ctx) {
     // Player
     ctx.save();
     ctx.translate(player.x + hW, player.y + hH);
