@@ -34,7 +34,7 @@ var items = [
         name: 'Efficiency',
         desc: 'Increases efficiency of mining rocks so you get more Altarian Dollars per asteroid',
         fn: function() {
-
+            player.defaults.moneyMultiplier += 0.1;
         }
     },
     {
@@ -48,7 +48,7 @@ var items = [
         name: 'Range',
         desc: 'The propulsion particles go further away, making it easier to destroy rocks',
         fn: function() {
-
+            player.defaults.propRange += 1;
         }
     },
     {
@@ -62,21 +62,21 @@ var items = [
         name: 'Invincibility',
         desc: 'Press spacebar to become invincible to all asteroids, so you can be as careless as you want for 30 seconds',
         fn: function() {
-
+            player.equipped = 'invincibility';
         }
     },
     {
         name: 'Panic explode',
         desc: 'Press spacebar to make all asteroids on screen explode',
         fn: function() {
-
+            player.equipped = 'explode';
         }
     },
     {
         name: 'Poison',
         desc: 'Is death ever better than hardship? Yes, when you get an achievement for it. Press spacebar to die within 30 seconds.',
         fn: function() {
-
+            player.equipped = 'poison';
         }
     },
     {

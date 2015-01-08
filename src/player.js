@@ -12,14 +12,15 @@ player.flying.name = 'astro-flying.png';
 player.state = 'idle';
 
 player.defaults = {
-    score: 0,
+    money: 0,
     angle: 0,
     offsetY: 0,
     offsetX: 0,
-    health: 100,
-    fuel: 100,
+    health: 10,
+    fuel: 10,
     hit: false,
-    propRange: 0.12
+    propRange: 8.3,
+    moneyMultiplier: 1
 };
 
 player.width = 52;
@@ -27,6 +28,8 @@ player.height = 60;
 player.x = (canvas.width - player.width) / 2;
 player.y = (canvas.height - player.height) / 2;
 player.angle = 0;
+player.totalMoney = player.money = 0;
+player.equipped = null;
 
 player.offsetX = player.offsetY = 0;
 
@@ -95,6 +98,10 @@ player.left = function(elapsed) {
 };
 player.flip = function() {
     player.angle += Math.PI;
+};
+player.equip = function() {
+    // Enable the equippable item
+    player.equipped = 'explode';
 };
 
 

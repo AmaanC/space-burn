@@ -64,6 +64,8 @@ var explodeObj = function(fo) {
     });
 };
 
+var justExploded = false;
+var ticks = 0;
 var check = function(player, foModule) {
     // fo stands for flyingObjects
     var particles = particlesModule.array;
@@ -72,28 +74,37 @@ var check = function(player, foModule) {
     var foInView = inArea(camera, fos, undefined, function(fo) {
         fo.alive = false;
     });
-    if (foInView.length < 30) {
+    if (foInView.length < 30 && justExploded !== true) {
         foModule.spawn(Math.random() * 100);
+    }
+    else if (justExploded === true) {
+        ticks++;
+        if (ticks >= 150) {
+            ticks = 0;
+            justExploded = false;
+        }
     }
 
     // Collisions between the player and rocks
     var foToTest = inArea(playerArea, fos);
     var fo;
-    for (var i = 0; i < foToTest.length; i++) {
-        fo = foToTest[i];
-        if (angledCollision(player, fo)) {
-            // console.log('HIT');
-            fo.alive = false;
-            if (fo.image === 'power-icon.png') {
-                audio.play('collect');
-                player.fuel += 10;
-            }
-            else {
-                audio.play('collide');
-                player.hit = true;
-                player.health -= (fo.width * fo.height) / 100;
-                explodeObj(fo);
-                shake(5);
+    if (!player.invincible) {
+        for (var i = 0; i < foToTest.length; i++) {
+            fo = foToTest[i];
+            if (angledCollision(player, fo)) {
+                // console.log('HIT');
+                fo.alive = false;
+                if (fo.image === 'power-icon.png') {
+                    audio.play('collect');
+                    player.fuel += 10;
+                }
+                else {
+                    audio.play('collide');
+                    player.hit = true;
+                    player.health -= (fo.width * fo.height) / 100;
+                    explodeObj(fo);
+                    shake(5);
+                }
             }
         }
     }
@@ -107,11 +118,25 @@ var check = function(player, foModule) {
             if (particles[i].alive && !fo.good) {
                 fo.alive = false;
                 audio.play('explode_meteor');
-                player.score += (fo.width * fo.height) / 100;
+                player.money += player.moneyMultiplier * (fo.width * fo.height) / 1000;
                 explodeObj(fo);
                 shake(2);
             }
         });
+    }
+
+    if (player.equipped === 'explode') {
+        player.equipped = null;
+        justExploded = true;
+
+        shake(10);
+        for (var i = 0; i < fos.length; i++) {
+            fo = fos[i];
+            if (fo.image !== 'power-icon.png') {
+                fo.alive = false;
+                explodeObj(fo);
+            }
+        }
     }
 };
 

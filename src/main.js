@@ -28,7 +28,7 @@ loader.done(function() {
             if (key.up() && player.fuel > 0) {
                 audio.play('jetpack');
                 player.up(elapsed);
-                particles.createParticles(player.x + player.width / 2, player.y + player.height / 2, 10, player.propRange, 10, ['blue', 'red'], {
+                particles.createParticles(player.x + player.width / 2, player.y + player.height / 2, 10, 1 / player.propRange, 10, ['blue', 'red'], {
                     range: Math.PI / 10
                 });
             } else {
@@ -53,20 +53,21 @@ loader.done(function() {
             particles.draw(elapsed, ctx, player);
             flyingObjects.loop(elapsed, ctx, player.offsetX, player.offsetY);
             player.draw(elapsed, ctx);
-            menus.ingame(ctx, player.fuel, player.health, player.score);
+            menus.ingame(ctx, player.fuel, player.health, player.money);
 
-            player.score += 0.1;
+            player.money += 0.01;
 
             if (player.health <= 0) {
+                player.totalMoney += Math.round(player.money);
                 window.state = 'end';
             }
         }
         else if (window.state === 'end') {
             audio.pause(sfx);
-            menus.drawEnd(ctx, player.score);
+            menus.drawEnd(ctx, player.money);
         }
         else if(window.state === 'store') {
-            menus.drawStore(ctx);
+            menus.drawStore(ctx, player.totalMoney);
         }
         buttons.drawAll();
     });
@@ -74,7 +75,6 @@ loader.done(function() {
 
 window.resetGame = function() {
     window.state = 'game';
-    player.score = 0;
     player.reset();
     particles.reset();
     flyingObjects.reset();

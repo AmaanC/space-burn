@@ -53,7 +53,6 @@ module.exports = {
         ctx.fillRect(0, 0, 800, 600);
 
         ctx.drawImage(loader.images['logo.png'], 314, 180);
-        // text.write('CLICK TO PLAY', 'center', 330);
         text.write('A GAME BY', 'center', 500);
         text.write('@AMAANC AND @MIKEDIDTHIS', 'center', 520, function(ctx) {
             ctx.fillStyle = '#DCFCF9';
@@ -61,15 +60,15 @@ module.exports = {
         });
 
     },
-    drawEnd: function(ctx, score) {
+    drawEnd: function(ctx, money) {
         ctx.fillStyle = '#0f0d20';
         ctx.fillRect(0, 0, 800, 600);
-        text.write('You earned A$' + Math.round(score) + '.', 'center', 300, function() {
+        text.write('You earned A$' + Math.round(money) + '.', 'center', 300, function() {
             ctx.fillStyle = 'white';
             ctx.font = '26pt Tempesta Five';
         });
     },
-    ingame: function(ctx, fuel, health, score) {
+    ingame: function(ctx, fuel, health, money) {
         ctx.drawImage(loader.images['power-bar-icon.png'], 30, 500);
         ctx.fillStyle = 'orange';
         ctx.fillRect(30, 490 - fuel, 20, fuel);
@@ -78,15 +77,19 @@ module.exports = {
         ctx.fillStyle = 'red';
         ctx.fillRect(70, 490 - health, 20, health);
 
-        text.write('A$: ' + Math.round(score), 30, 550, function() {
+        text.write('A$: ' + Math.round(money), 30, 550, function() {
             ctx.font = '12pt Tempesta Five';
             ctx.fillStyle = 'white';
         });
     },
-    drawStore: function(ctx) {
+    drawStore: function(ctx, totalMoney) {
         ctx.fillStyle = '#0f0d20';
         ctx.fillRect(0, 0, 800, 600);
         text.write('STORE', 30, 50, function() {
+            ctx.font = '16pt Tempesta Five';
+            ctx.fillStyle = 'white';
+        });
+        text.write('Altarian Dollars: ' + totalMoney, 200, 50, function() {
             ctx.font = '16pt Tempesta Five';
             ctx.fillStyle = 'white';
         });

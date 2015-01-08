@@ -9,7 +9,7 @@ var C = {
 }
 document.body.addEventListener('keydown', function(e) {
     if (e.keyCode === C.SPACE) {
-        player.flip();
+        player.equip();
         e.preventDefault();
     }
     else if (e.keyCode >= 37 && e.keyCode <= 40) {
@@ -33,8 +33,5 @@ module.exports = {
     },
     down: function() {
         return keys[C.DOWN];
-    },
-    flip: function() {
-        return keys[C.SPACE];
     }
 };
