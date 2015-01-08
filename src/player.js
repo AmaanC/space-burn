@@ -29,7 +29,7 @@ player.x = (canvas.width - player.width) / 2;
 player.y = (canvas.height - player.height) / 2;
 player.angle = 0;
 player.totalMoney = player.money = 0;
-player.equipped = null;
+player.equipped = 'invincibility';
 
 player.offsetX = player.offsetY = 0;
 
@@ -96,9 +96,9 @@ player.right = function(elapsed) {
 player.left = function(elapsed) {
     player.angle -= elapsed * turnSpeed * Math.PI;
 };
-player.equip = function() {
+player.trigger = function() {
     // Enable the equippable item
-    player.equipped = 'explode';
+    player.triggered = player.equipped;
 };
 
 

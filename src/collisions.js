@@ -128,8 +128,8 @@ var check = function(player, foModule) {
         });
     }
 
-    if (player.equipped === 'explode') {
-        player.equipped = null;
+    if (player.triggered === 'explode') {
+        player.triggered = null;
         justExploded = true;
 
         shake(10);

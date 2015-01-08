@@ -9,7 +9,7 @@ var C = {
 }
 document.body.addEventListener('keydown', function(e) {
     if (e.keyCode === C.SPACE) {
-        player.equip();
+        player.trigger();
         e.preventDefault();
     }
     else if (e.keyCode >= 37 && e.keyCode <= 40) {
