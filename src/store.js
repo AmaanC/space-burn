@@ -1,17 +1,18 @@
+// Handles the market / store part of the game
 var player = require('./player');
 var buttons = require('./buttons');
 
 var items = [
     {
         name: 'Health',
-        desc: 'Increases health by 10',
+        desc: 'Increases starting health by 10',
         fn: function() {
             player.defaults.health += 10;
         }
     },
     {
         name: 'Fuel',
-        desc: 'Increases fuel by 10',
+        desc: 'Increases starting fuel by 10',
         fn: function() {
             player.defaults.fuel += 10;
         }
@@ -21,6 +22,7 @@ var items = [
         desc: '',
         fn: function() {
             player.colors = ['blue', 'red'];
+            // player.colors = ['white', 'anything'];
         }
     },
     {

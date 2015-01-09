@@ -10,6 +10,7 @@ var menus = require('./menus');
 var buttons = require('./buttons');
 var audio = require('./audio');
 var store = require('./store');
+var achievements = require('./achievements');
 
 var canvas = document.querySelector('#game');
 var ctx = canvas.getContext('2d');
@@ -53,7 +54,7 @@ loader.done(function() {
             particles.draw(elapsed, ctx, player);
             flyingObjects.loop(elapsed, ctx, player.offsetX, player.offsetY);
             player.draw(ctx);
-            menus.ingame(ctx, player.fuel, player.health, player.money);
+            menus.ingame(ctx, player.fuel, player.health, player.money, player.equipped);
 
             player.money += 0.01;
             if (player.triggered === 'poison') {

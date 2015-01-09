@@ -7,11 +7,6 @@ var playerHitBox = {
     width: 50,
     height: 60
 };
-var angledCollision = function(player, fo) {
-    var colliding = false;
-    colliding = aabb(playerHitBox, fo);
-    return colliding;
-};
 
 var aabb = function(a, b) {
     if (
@@ -93,7 +88,7 @@ var check = function(player, foModule) {
     var fo;
     for (var i = 0; i < foToTest.length; i++) {
         fo = foToTest[i];
-        if (angledCollision(player, fo)) {
+        if (aabb(playerHitBox, fo)) {
             // console.log('HIT');
             fo.alive = false;
             if (fo.image === 'power-icon.png') {

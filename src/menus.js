@@ -68,7 +68,7 @@ module.exports = {
             ctx.font = '26pt Tempesta Five';
         });
     },
-    ingame: function(ctx, fuel, health, money) {
+    ingame: function(ctx, fuel, health, money, equipped) {
         ctx.drawImage(loader.images['power-bar-icon.png'], 30, 500);
         ctx.fillStyle = 'orange';
         ctx.fillRect(30, 490 - fuel, 20, fuel);
@@ -79,6 +79,10 @@ module.exports = {
 
         text.write('A$: ' + Math.round(money), 30, 550, function() {
             ctx.font = '12pt Tempesta Five';
+            ctx.fillStyle = 'white';
+        });
+        text.write('Equipped: ' + equipped, 30, 590, function() {
+            ctx.font = '10pt Tempesta Five';
             ctx.fillStyle = 'white';
         });
     },
