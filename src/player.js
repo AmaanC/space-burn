@@ -16,8 +16,8 @@ player.defaults = {
     angle: 0,
     offsetY: 0,
     offsetX: 0,
-    health: 10,
-    fuel: 10,
+    health: 100,
+    fuel: 100,
     hit: false,
     propRange: 8.3,
     moneyMultiplier: 1
