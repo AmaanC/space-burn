@@ -20,12 +20,14 @@ var Particle = function(x, y, speed, decRate, colors) {
         if (this.delay > 0) {
             if (this.delay <= 1) {
                 this.angle = player.angle - this.range + (Math.random() * 2 * this.range);
+                this.dx = Math.sin(-this.angle) * this.speed;
+                this.dy = Math.cos(-this.angle) * this.speed;
             }
             this.delay--;
             return false;
         }
-        this.x += 66.6 * elapsed * (this.dx - window.player.offsetX + Math.sin(-this.angle) * speed);
-        this.y += 66.6 * elapsed * (this.dy - window.player.offsetY + Math.cos(-this.angle) * speed);
+        this.x += 66 * elapsed * (this.dx - window.player.offsetX);
+        this.y += 66 * elapsed * (this.dy - window.player.offsetY);
         this.opacity -= this.decRate;
         if (this.opacity <= 0) {
             this.opacity = 0;
