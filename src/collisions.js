@@ -80,6 +80,7 @@ var check = function(player, foModule) {
         if (ticks >= 150) {
             ticks = 0;
             justExploded = false;
+            particlesModule.array.length = 100; // Doing this improves performance after explosions
         }
     }
 
@@ -143,9 +144,13 @@ var check = function(player, foModule) {
         for (var i = 0; i < fos.length; i++) {
             fo = fos[i];
             if (fo.image !== 'power-icon.png') {
-                fo.alive = false;
-                player.addMoney(fo);
-                explodeObj(fo);
+                setTimeout((function(fo) {
+                    return function() {
+                        fo.alive = false;
+                        player.addMoney(fo);
+                        explodeObj(fo);
+                    };
+                })(fo), Math.random() * 300);
             }
         }
     }
