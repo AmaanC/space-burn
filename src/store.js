@@ -1,6 +1,6 @@
 // Handles the market / store part of the game
 var player = require('./player');
-var buttons = require('./buttons');
+var buttons = require('./butts');
 
 var items = [
     {

@@ -1,4 +1,6 @@
 // Makes it easier to make menu buttons
+// File name courtesy - http://chat.stackoverflow.com/transcript/17?m=21723601#21723601
+
 var buttons = [];
 
 var canvas = document.querySelector('#game');

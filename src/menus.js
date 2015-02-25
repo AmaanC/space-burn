@@ -1,6 +1,6 @@
 var loader = require('./loader');
 var text = require('./text');
-var buttons = require('./buttons');
+var buttons = require('./butts');
 
 buttons.addButton(
     {
