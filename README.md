@@ -1,6 +1,6 @@
 # JS13KGames - 2014 - [Play here](http://whatthedude.com/space-burn/build)
 
-##Controls
+## Controls
 
 **Up** - Power jetpack
 
@@ -11,7 +11,7 @@
 **Spacebar** - Turn 180 degrees
 
 
-##Gameplay
+## Gameplay
 
 You control a character with a jetpack, in an asteroid field.
 You have no weapons...except your jetpack, which spouts flames!
@@ -20,12 +20,12 @@ You fly around, and destroy asteroids by using your jetpack's flames.
 
 The spacebar control helps people maneuver better.
 
-##Extra
+## Extra
 
 - There could be a bunch of powerups, but I haven't thought of any yet.
 - There *could* be combos to gamify it more
 
-##Sketch
+## Sketch
 
 [Go here](http://sketchtoy.com/62629853).
 
